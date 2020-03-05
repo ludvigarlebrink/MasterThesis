@@ -8,4 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/ARTest.unity
+    guid: e1f792da126522b41bb47f0da1525c18
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 883096e969ba85d48b5ba97156af8eb9,
+      type: 2}
