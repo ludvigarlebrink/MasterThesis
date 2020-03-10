@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class NavFollow : MonoBehaviour
 {
-    NavMeshAgent m_agent = null;
+    public Pathfinding Pathfinder;
+    public LayerMask RaycastMask;
+
     bool m_stopped = true;
     float m_baseSpeed = 0.5f;
+    List<Vector3> m_cornerNodes;
+    int m_cornersIterator = 0;
 
     void Start()
     {
-        m_agent = GetComponent<NavMeshAgent>();
-
         Stop();
     }
 
@@ -20,16 +23,26 @@ public class NavFollow : MonoBehaviour
     {
         if (m_stopped)
         {
-            return;
+          //  return;
         }
 
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, RaycastMask))
             {
-                m_agent.destination = hit.point;
+                m_cornerNodes = Pathfinder.FindPath(transform.position, hit.point);
+                m_cornersIterator = 0;
+            }
+        }
+
+        if (m_cornersIterator < m_cornerNodes.Count && m_cornerNodes != null && m_cornerNodes.Count > 0)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, m_cornerNodes[m_cornersIterator], m_baseSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, m_cornerNodes[m_cornersIterator]) < Vector3.kEpsilon)
+            {
+                m_cornersIterator++;
             }
         }
     }
@@ -37,24 +50,21 @@ public class NavFollow : MonoBehaviour
     public void Go()
     {
         m_stopped = false;
-        m_agent.speed = m_baseSpeed;
     }
 
     public void Stop()
     {
         m_stopped = true;
-        m_agent.speed = 0;
     }
 
     public void SetSpeedModifier(float modifier, float seconds)
     {
-        m_agent.speed = m_baseSpeed * modifier;
         StartCoroutine(ResetSpeedCoroutine(seconds));
     }
 
     private IEnumerator ResetSpeedCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        m_agent.speed = m_baseSpeed;
+
     }
 }
