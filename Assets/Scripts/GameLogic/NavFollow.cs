@@ -8,6 +8,9 @@ public class NavFollow : MonoBehaviour
 {
     public Pathfinding pathfinder;
     public LayerMask raycastMask;
+    public AreaManager manager;
+    public SpriteMask timerMask;
+
 
     bool m_Stopped = true;
     float m_BaseSpeed = 0.5f;
@@ -18,11 +21,22 @@ public class NavFollow : MonoBehaviour
 
     void Start()
     {
+        if (manager)
+        {
+            manager.EventStartTimer += Go;
+            manager.EventEndTimer += Stop;
+        }
+
         Stop();
     }
 
     void Update()
     {
+        if (timerMask && manager)
+        {
+            timerMask.alphaCutoff = manager.remainingTimeFraction;
+        }
+
         if (m_Stopped)
         {
             return;
@@ -47,7 +61,6 @@ public class NavFollow : MonoBehaviour
                 m_CornersIterator++;
             }
         }
-
     }
 
     public void Go()
@@ -62,6 +75,10 @@ public class NavFollow : MonoBehaviour
 
     public void SetSpeedModifier(float modifier, float seconds)
     {
+        if (modifier <= 0)
+        {
+            modifier = float.Epsilon;
+        }
         StartCoroutine(ModifySpeedCoroutine(modifier, seconds));
     }
 
