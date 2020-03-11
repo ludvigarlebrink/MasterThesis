@@ -8,6 +8,7 @@ public class NavFollow : MonoBehaviour
 {
     public Pathfinding Pathfinder;
     public LayerMask RaycastMask;
+    public Transform TrackingImageRoot;
 
     bool m_stopped = true;
     float m_baseSpeed = 0.5f;
@@ -37,7 +38,7 @@ public class NavFollow : MonoBehaviour
             }
         }
 
-        if (m_cornersIterator < m_cornerNodes.Count && m_cornerNodes != null && m_cornerNodes.Count > 0)
+        if (m_cornerNodes != null && m_cornersIterator < m_cornerNodes.Count && m_cornerNodes.Count > 0)
         {
             transform.position = Vector3.MoveTowards(transform.position, m_cornerNodes[m_cornersIterator], m_baseSpeed * Time.deltaTime);
             if (Vector3.Distance(transform.position, m_cornerNodes[m_cornersIterator]) < Vector3.kEpsilon)
@@ -45,6 +46,7 @@ public class NavFollow : MonoBehaviour
                 m_cornersIterator++;
             }
         }
+
     }
 
     public void Go()
