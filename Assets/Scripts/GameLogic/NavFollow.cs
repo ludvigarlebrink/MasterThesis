@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class NavFollow : MonoBehaviour
 {
-    public Pathfinding Pathfinder;
-    public LayerMask RaycastMask;
-    public Transform TrackingImageRoot;
+    public Pathfinding pathfinder;
+    public LayerMask raycastMask;
 
-    bool m_stopped = true;
-    float m_baseSpeed = 0.5f;
-    List<Vector3> m_cornerNodes;
-    int m_cornersIterator = 0;
+    bool m_Stopped = true;
+    float m_BaseSpeed = 0.5f;
+    List<Vector3> m_CornerNodes;
+    int m_CornersIterator = 0;
+
+    float m_SpeedModifier = 1.0f;
 
     void Start()
     {
@@ -22,28 +23,28 @@ public class NavFollow : MonoBehaviour
 
     void Update()
     {
-        if (m_stopped)
+        if (m_Stopped)
         {
-          //  return;
+            return;
         }
 
         if (Input.GetMouseButton(0))
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, RaycastMask))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, raycastMask))
             {
-                m_cornerNodes = Pathfinder.FindPath(transform.position, hit.point);
-                m_cornersIterator = 0;
+                m_CornerNodes = pathfinder.FindPath(transform.position, hit.point);
+                m_CornersIterator = 0;
             }
         }
 
-        if (m_cornerNodes != null && m_cornersIterator < m_cornerNodes.Count && m_cornerNodes.Count > 0)
+        if (m_CornerNodes != null && m_CornersIterator < m_CornerNodes.Count && m_CornerNodes.Count > 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, m_cornerNodes[m_cornersIterator], m_baseSpeed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, m_cornerNodes[m_cornersIterator]) < Vector3.kEpsilon)
+            transform.position = Vector3.MoveTowards(transform.position, m_CornerNodes[m_CornersIterator], m_BaseSpeed * m_SpeedModifier * Time.deltaTime);
+            if (Vector3.Distance(transform.position, m_CornerNodes[m_CornersIterator]) < Vector3.kEpsilon)
             {
-                m_cornersIterator++;
+                m_CornersIterator++;
             }
         }
 
@@ -51,22 +52,23 @@ public class NavFollow : MonoBehaviour
 
     public void Go()
     {
-        m_stopped = false;
+        m_Stopped = false;
     }
 
     public void Stop()
     {
-        m_stopped = true;
+        m_Stopped = true;
     }
 
     public void SetSpeedModifier(float modifier, float seconds)
     {
-        StartCoroutine(ResetSpeedCoroutine(seconds));
+        StartCoroutine(ModifySpeedCoroutine(modifier, seconds));
     }
 
-    private IEnumerator ResetSpeedCoroutine(float seconds)
+    private IEnumerator ModifySpeedCoroutine(float modifier, float seconds)
     {
+        m_SpeedModifier *= modifier;
         yield return new WaitForSeconds(seconds);
-
+        m_SpeedModifier /= modifier;
     }
 }
