@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class AreaManager : MonoBehaviour
     private int m_currentNoise = 0;
     private int m_currentLoot = 0;
 
+    private GameObject m_burglar;
+
     public float remainingTimeFraction
     {
         get
@@ -27,8 +30,8 @@ public class AreaManager : MonoBehaviour
         }
     }
 
-    public event Action EventStartTimer;
-    public event Action EventEndTimer;
+    public event Action eventStartTimer;
+    public event Action eventEndTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -58,21 +61,23 @@ public class AreaManager : MonoBehaviour
 
     private void OnGameTimeStart()
     {
-        if (EventStartTimer != null )
+        if (eventStartTimer != null )
         {
-            EventStartTimer.Invoke();
+            eventStartTimer.Invoke();
         }
     }
 
     private void OnGameTimeEnd()
     {
-        if (EventEndTimer != null)
+        if (eventEndTimer != null)
         {
-            EventEndTimer.Invoke();
+            eventEndTimer.Invoke();
 
             m_Running = false;
             resultText.text = "Loot Collected: " + m_currentLoot + "\nNoise Created: " + m_currentNoise;
             startButton.SetActive(true);
+
+            PhotonNetwork.Destroy(m_burglar);
         }
     }
 
@@ -94,6 +99,12 @@ public class AreaManager : MonoBehaviour
     {
         if (m_tracking && !m_Running)
         {
+            m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(new Vector3(-0.065f, 0.0f, -0.217f)), Quaternion.identity);
+            m_burglar.transform.parent = transform.parent;
+            m_burglar.transform.localScale = Vector3.one;
+            m_burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
+            m_burglar.GetComponent<LootCollector>().Setup(this);
+
             m_currentTimer = 3;
             m_timer.InitializeTimer(m_currentTimer);
             m_timer.EventTimerEnd += OnCountDownEnd;

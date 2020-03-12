@@ -10,10 +10,17 @@ public class LootCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    public void Setup(AreaManager _manager)
+    {
+        manager = _manager;
+
         if (manager)
         {
-            manager.EventStartTimer += ResetLoot;
-            manager.EventEndTimer += SendLootScore;
+            manager.eventStartTimer += ResetLoot;
+            manager.eventEndTimer += SendLootScore;
         }
     }
 

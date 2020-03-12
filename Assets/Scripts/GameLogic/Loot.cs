@@ -17,7 +17,7 @@ public class Loot : MonoBehaviour
 
         if (manager)
         {
-            manager.EventStartTimer += ResetLoot;
+            manager.eventStartTimer += ResetLoot;
         }
     }
 

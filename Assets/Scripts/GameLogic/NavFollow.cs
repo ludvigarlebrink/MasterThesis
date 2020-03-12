@@ -23,11 +23,19 @@ public class NavFollow : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    public void Setup(AreaManager _manager, Pathfinding _pathfinder)
+    {
+        manager = _manager;
+        pathfinder = _pathfinder;
+
         if (manager)
         {
-            manager.EventStartTimer += Go;
-            manager.EventStartTimer += ResetNoise;
-            manager.EventEndTimer += Stop;
+            manager.eventStartTimer += Go;
+            manager.eventStartTimer += ResetNoise;
+            manager.eventEndTimer += Stop;
         }
 
         Stop();
