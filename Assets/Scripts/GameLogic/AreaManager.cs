@@ -1,33 +1,43 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Vuforia;
 
 public class AreaManager : MonoBehaviour
 {
-    Timer m_timer;
-    float m_currentTimer = 0;
+    private Timer m_timer;
+    private float m_currentTimer = 0;
+    private bool m_Running = false;
+    public TrackableBehaviour trackableBehaviour;
 
-    public NavFollow AvatarNavFollow;
-    public SpriteMask TimerMask;
+    public float remainingTimeFraction
+    {
+        get
+        {
+            return m_timer.CurrentTime / m_currentTimer;
+        }
+    }
+
+    public event Action EventStartTimer;
+    public event Action EventEndTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         m_timer = GetComponent<Timer>();
 
-        m_currentTimer = 3;
-        m_timer.InitializeTimer(m_currentTimer);
-        m_timer.EventTimerEnd += OnCountDownEnd;
-        m_timer.StartTimer();
+        if (trackableBehaviour)
+        {
+            trackableBehaviour.RegisterOnTrackableStatusChanged(OnTrackableStatusChanged);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_currentTimer > 0)
-        {
-            TimerMask.alphaCutoff = m_timer.CurrentTime / m_currentTimer;
-        }
+
     }
 
     private void OnCountDownEnd()
@@ -41,17 +51,29 @@ public class AreaManager : MonoBehaviour
 
     private void OnGameTimeStart()
     {
-        if (AvatarNavFollow)
+        if (EventStartTimer != null )
         {
-            AvatarNavFollow.Go();
+            EventStartTimer.Invoke();
         }
     }
 
     private void OnGameTimeEnd()
     {
-        if (AvatarNavFollow)
+        if (EventEndTimer != null)
         {
-            AvatarNavFollow.Stop();
+            EventEndTimer.Invoke();
+        }
+    }
+
+    private void OnTrackableStatusChanged(TrackableBehaviour.StatusChangeResult change)
+    {
+        if ( !m_Running && (change.NewStatus == TrackableBehaviour.Status.DETECTED || change.NewStatus == TrackableBehaviour.Status.TRACKED))
+        {
+            m_currentTimer = 3;
+            m_timer.InitializeTimer(m_currentTimer);
+            m_timer.EventTimerEnd += OnCountDownEnd;
+            m_timer.StartTimer();
+            m_Running = true;
         }
     }
 }
