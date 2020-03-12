@@ -91,19 +91,12 @@ public class RoomState : MonoBehaviourPunCallbacks
         m_Player3NameText.text = "NONE";
         m_Player4NameText.text = "NONE";
 
-        m_Player1NameText.color = Color.red;
-        m_Player2NameText.color = Color.red;
-        m_Player3NameText.color = Color.red;
-        m_Player4NameText.color = Color.red;
-
         int offset = 0;
         foreach (KeyValuePair<string, Player> player in m_Players)
         {
             switch (offset)
             {
                 case 0:
-                    m_Player1NameText.color = Color.green;
-
                     if (player.Value.IsMasterClient)
                     {
                         m_Player1NameText.text = player.Key + " (Host)";
@@ -114,8 +107,6 @@ public class RoomState : MonoBehaviourPunCallbacks
                     }
                     break;
                 case 1:
-                    m_Player2NameText.color = Color.green;
-
                     if (player.Value.IsMasterClient)
                     {
                         m_Player2NameText.text = player.Key + " (Host)";
@@ -126,8 +117,6 @@ public class RoomState : MonoBehaviourPunCallbacks
                     }
                     break;
                 case 2:
-                    m_Player3NameText.color = Color.green;
-
                     if (player.Value.IsMasterClient)
                     {
                         m_Player3NameText.text = player.Key + " (Host)";
@@ -138,8 +127,6 @@ public class RoomState : MonoBehaviourPunCallbacks
                     }
                     break;
                 case 3:
-                    m_Player4NameText.color = Color.green;
-
                     if (player.Value.IsMasterClient)
                     {
                         m_Player4NameText.text = player.Key + " (Host)";
