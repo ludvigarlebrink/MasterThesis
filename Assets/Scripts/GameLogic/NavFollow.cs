@@ -10,7 +10,9 @@ public class NavFollow : MonoBehaviour
     public LayerMask raycastMask;
     public AreaManager manager;
     public SpriteMask timerMask;
+    public SpriteMask noiseMask;
 
+    private float m_currentNoise;
 
     bool m_Stopped = true;
     float m_BaseSpeed = 0.5f;
@@ -24,6 +26,7 @@ public class NavFollow : MonoBehaviour
         if (manager)
         {
             manager.EventStartTimer += Go;
+            manager.EventStartTimer += ResetNoise;
             manager.EventEndTimer += Stop;
         }
 
@@ -35,6 +38,11 @@ public class NavFollow : MonoBehaviour
         if (timerMask && manager)
         {
             timerMask.alphaCutoff = manager.remainingTimeFraction;
+        }
+
+        if (noiseMask)
+        {
+            noiseMask.alphaCutoff = m_currentNoise;
         }
 
         if (m_Stopped)
@@ -60,6 +68,21 @@ public class NavFollow : MonoBehaviour
             {
                 m_CornersIterator++;
             }
+
+            m_currentNoise += 0.4f * Time.deltaTime;
+            Mathf.Clamp01(m_currentNoise);
+        }
+
+        if (m_currentNoise >= 1)
+        {
+            Stop();
+            return;
+        }
+
+        if (m_currentNoise > 0)
+        {
+            m_currentNoise -= 0.25f * Time.deltaTime;
+            Mathf.Clamp01(m_currentNoise);
         }
     }
 
@@ -71,6 +94,11 @@ public class NavFollow : MonoBehaviour
     public void Stop()
     {
         m_Stopped = true;
+    }
+
+    private void ResetNoise()
+    {
+        m_currentNoise = 0;
     }
 
     public void SetSpeedModifier(float modifier, float seconds)
