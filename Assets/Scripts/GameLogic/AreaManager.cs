@@ -100,8 +100,6 @@ public class AreaManager : MonoBehaviour
         if (m_tracking && !m_Running)
         {
             m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(new Vector3(-0.065f, 0.0f, -0.217f)), Quaternion.identity);
-            m_burglar.transform.parent = transform.parent;
-            m_burglar.transform.localScale = Vector3.one;
             m_burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
             m_burglar.GetComponent<LootCollector>().Setup(this);
 
