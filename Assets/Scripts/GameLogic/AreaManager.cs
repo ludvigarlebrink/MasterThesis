@@ -8,6 +8,7 @@ using Vuforia;
 
 public class AreaManager : MonoBehaviour
 {
+    private PlayerRaycaster m_raycaster;
     private Timer m_timer;
     private float m_currentTimer = 0;
     private bool m_Running = false;
@@ -37,10 +38,16 @@ public class AreaManager : MonoBehaviour
     void Start()
     {
         m_timer = GetComponent<Timer>();
+        m_raycaster = GetComponent<PlayerRaycaster>();
 
         if (trackableBehaviour)
         {
             trackableBehaviour.RegisterOnTrackableStatusChanged(OnTrackableStatusChanged);
+        }
+
+        if (startButton.activeInHierarchy && m_raycaster)
+        {
+            m_raycaster.eventRaycastHit += StartButtonPressed;
         }
     }
 
@@ -61,7 +68,7 @@ public class AreaManager : MonoBehaviour
 
     private void OnGameTimeStart()
     {
-        if (eventStartTimer != null )
+        if (eventStartTimer != null)
         {
             eventStartTimer.Invoke();
         }
@@ -75,7 +82,7 @@ public class AreaManager : MonoBehaviour
 
             m_Running = false;
             resultText.text = "Loot Collected: " + m_currentLoot + "\nNoise Created: " + m_currentNoise;
-            startButton.SetActive(true);
+            SetStartButtonActive(true);
 
             PhotonNetwork.Destroy(m_burglar);
         }
@@ -86,18 +93,18 @@ public class AreaManager : MonoBehaviour
         if (!m_tracking && (change.NewStatus == TrackableBehaviour.Status.DETECTED || change.NewStatus == TrackableBehaviour.Status.TRACKED))
         {
             m_tracking = true;
-            startButton.SetActive(!m_Running);
+            SetStartButtonActive(!m_Running);
         }
         else if (m_tracking && change.NewStatus == TrackableBehaviour.Status.NO_POSE)
         {
             m_tracking = false;
-            startButton.SetActive(false);
+            SetStartButtonActive(false);
         }
     }
 
     public void StartButtonPressed()
     {
-        if (m_tracking && !m_Running)
+        if (/*m_tracking &&*/ !m_Running)
         {
             m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(new Vector3(-0.065f, 0.0f, -0.217f)), Quaternion.identity);
             m_burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
@@ -112,8 +119,16 @@ public class AreaManager : MonoBehaviour
             m_currentNoise = 0;
             m_currentLoot = 0;
 
-            startButton.SetActive(false);
+            SetStartButtonActive(false);
             resultText.text = "";
+        }
+    }
+
+    public void StartButtonPressed(Vector3 hitPosition, int hitLayer)
+    {
+        if (LayerMask.NameToLayer("3DButton") == hitLayer)
+        {
+            StartButtonPressed();
         }
     }
 
@@ -125,5 +140,15 @@ public class AreaManager : MonoBehaviour
     public void SetCurrentLoot(int loot)
     {
         m_currentLoot = loot;
+    }
+
+    private void SetStartButtonActive(bool active)
+    {
+        m_raycaster.eventRaycastHit -= StartButtonPressed;
+        startButton.SetActive(active);
+        if (active)
+        {
+            m_raycaster.eventRaycastHit += StartButtonPressed;
+        }
     }
 }
