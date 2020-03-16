@@ -7,18 +7,6 @@ public class Obstacle : MonoBehaviour
     public float speedModifier = 0.1f;
     public float modifyTime = 5.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

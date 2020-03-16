@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    float m_Time = 0;
-    bool m_Abort = false;
+    public event Action EventTimerStart;
+    public event Action EventTimerEnd;
+    public event Action EventTimerAbort;
+
+    private float m_Time = 0;
+    private bool m_Abort = false;
 
     public float CurrentTime
     {
@@ -14,20 +18,11 @@ public class Timer : MonoBehaviour
         {
             return m_Time;
         }
-        set
-        {
-            return;
-        }
     }
 
-    public event Action EventTimerStart;
-    public event Action EventTimerEnd;
-    public event Action EventTimerAbort;
-
-    // Start is called before the first frame update
-    void Start()
+    public void AbortTimer()
     {
-
+        m_Abort = true;
     }
 
     public void InitializeTimer(float seconds)
@@ -47,11 +42,6 @@ public class Timer : MonoBehaviour
         }
 
         StartCoroutine(TimerCoroutine());
-    }
-
-    public void AbortTimer()
-    {
-        m_Abort = true;
     }
 
     private IEnumerator TimerCoroutine()
