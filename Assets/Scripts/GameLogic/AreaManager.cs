@@ -10,11 +10,6 @@ public class AreaManager : MonoBehaviour
 {
     [SerializeField] private Transform m_SpawnPosition;
 
-    private PlayerRaycaster m_raycaster;
-    private Timer m_timer;
-    private float m_currentTimer = 0;
-    private bool m_Running = false;
-    private bool m_tracking = false;
     public TrackableBehaviour trackableBehaviour;
 
     public GameObject startButton;
