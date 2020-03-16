@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-    bool m_collected;
-    Color m_activeColor;
+    bool m_Collected;
+    Color m_ActiveColor;
 
     public AreaManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_collected = false;
-        m_activeColor = GetComponent<MeshRenderer>().material.color;
+        m_Collected = false;
+        m_ActiveColor = GetComponent<MeshRenderer>().material.color;
 
         if (manager)
         {
@@ -29,13 +29,13 @@ public class Loot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !m_collected)
+        if (other.CompareTag("Player") && !m_Collected)
         {
             LootCollector collector = other.GetComponentInParent<LootCollector>();
             if (collector)
             {
                 collector.IncreaseLoot(1);
-                m_collected = true;
+                m_Collected = true;
                 GetComponent<MeshRenderer>().material.color = Color.gray;
             }
         }
@@ -43,7 +43,7 @@ public class Loot : MonoBehaviour
 
     private void ResetLoot()
     {
-        m_collected = false;
-        GetComponent<MeshRenderer>().material.color = m_activeColor;
+        m_Collected = false;
+        GetComponent<MeshRenderer>().material.color = m_ActiveColor;
     }
 }

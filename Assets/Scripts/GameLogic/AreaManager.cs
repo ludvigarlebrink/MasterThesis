@@ -8,26 +8,28 @@ using Vuforia;
 
 public class AreaManager : MonoBehaviour
 {
-    private PlayerRaycaster m_raycaster;
-    private Timer m_timer;
-    private float m_currentTimer = 0;
-    private bool m_Running = false;
-    private bool m_tracking = false;
     public TrackableBehaviour trackableBehaviour;
 
     public GameObject startButton;
     public Text resultText;
+    public Vector3 spawnPosition = new Vector3(-0.065f, 0.0f, -0.217f);
 
-    private int m_currentNoise = 0;
-    private int m_currentLoot = 0;
+    private PlayerRaycaster m_Raycaster;
+    private Timer m_Timer;
+    private float m_CurrentTimer = 0;
+    private bool m_Running = false;
+    private bool m_Tracking = false;
 
-    private GameObject m_burglar;
+    private int m_CurrentNoise = 0;
+    private int m_CurrentLoot = 0;
+
+    private GameObject m_Burglar;
 
     public float remainingTimeFraction
     {
         get
         {
-            return m_timer.CurrentTime / m_currentTimer;
+            return m_Timer.CurrentTime / m_CurrentTimer;
         }
     }
 
@@ -37,17 +39,17 @@ public class AreaManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_timer = GetComponent<Timer>();
-        m_raycaster = GetComponent<PlayerRaycaster>();
+        m_Timer = GetComponent<Timer>();
+        m_Raycaster = GetComponent<PlayerRaycaster>();
 
         if (trackableBehaviour)
         {
             trackableBehaviour.RegisterOnTrackableStatusChanged(OnTrackableStatusChanged);
         }
 
-        if (startButton.activeInHierarchy && m_raycaster)
+        if (startButton.activeInHierarchy && m_Raycaster)
         {
-            m_raycaster.eventRaycastHit += StartButtonPressed;
+            m_Raycaster.eventRaycastHit += StartButtonPressed;
         }
     }
 
@@ -59,11 +61,11 @@ public class AreaManager : MonoBehaviour
 
     private void OnCountDownEnd()
     {
-        m_currentTimer = 30;
-        m_timer.InitializeTimer(m_currentTimer);
-        m_timer.EventTimerStart += OnGameTimeStart;
-        m_timer.EventTimerEnd += OnGameTimeEnd;
-        m_timer.StartTimer();
+        m_CurrentTimer = 30;
+        m_Timer.InitializeTimer(m_CurrentTimer);
+        m_Timer.EventTimerStart += OnGameTimeStart;
+        m_Timer.EventTimerEnd += OnGameTimeEnd;
+        m_Timer.StartTimer();
     }
 
     private void OnGameTimeStart()
@@ -81,23 +83,23 @@ public class AreaManager : MonoBehaviour
             eventEndTimer.Invoke();
 
             m_Running = false;
-            resultText.text = "Loot Collected: " + m_currentLoot + "\nNoise Created: " + m_currentNoise;
+            resultText.text = "Loot Collected: " + m_CurrentLoot + "\nNoise Created: " + m_CurrentNoise;
             SetStartButtonActive(true);
 
-            PhotonNetwork.Destroy(m_burglar);
+            PhotonNetwork.Destroy(m_Burglar);
         }
     }
 
     private void OnTrackableStatusChanged(TrackableBehaviour.StatusChangeResult change)
     {
-        if (!m_tracking && (change.NewStatus == TrackableBehaviour.Status.DETECTED || change.NewStatus == TrackableBehaviour.Status.TRACKED))
+        if (!m_Tracking && (change.NewStatus == TrackableBehaviour.Status.DETECTED || change.NewStatus == TrackableBehaviour.Status.TRACKED))
         {
-            m_tracking = true;
+            m_Tracking = true;
             SetStartButtonActive(!m_Running);
         }
-        else if (m_tracking && change.NewStatus == TrackableBehaviour.Status.NO_POSE)
+        else if (m_Tracking && change.NewStatus == TrackableBehaviour.Status.NO_POSE)
         {
-            m_tracking = false;
+            m_Tracking = false;
             SetStartButtonActive(false);
         }
     }
@@ -106,18 +108,18 @@ public class AreaManager : MonoBehaviour
     {
         if (/*m_tracking &&*/ !m_Running)
         {
-            m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(new Vector3(-0.065f, 0.0f, -0.217f)), Quaternion.identity);
-            m_burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
-            m_burglar.GetComponent<LootCollector>().Setup(this);
+            m_Burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(spawnPosition), Quaternion.identity);
+            m_Burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
+            m_Burglar.GetComponent<LootCollector>().Setup(this);
 
-            m_currentTimer = 3;
-            m_timer.InitializeTimer(m_currentTimer);
-            m_timer.EventTimerEnd += OnCountDownEnd;
-            m_timer.StartTimer();
+            m_CurrentTimer = 3;
+            m_Timer.InitializeTimer(m_CurrentTimer);
+            m_Timer.EventTimerEnd += OnCountDownEnd;
+            m_Timer.StartTimer();
             m_Running = true;
 
-            m_currentNoise = 0;
-            m_currentLoot = 0;
+            m_CurrentNoise = 0;
+            m_CurrentLoot = 0;
 
             SetStartButtonActive(false);
             resultText.text = "";
@@ -134,21 +136,21 @@ public class AreaManager : MonoBehaviour
 
     public void IncreaseCurrentNoise(int increase)
     {
-        m_currentNoise += increase;
+        m_CurrentNoise += increase;
     }
 
     public void SetCurrentLoot(int loot)
     {
-        m_currentLoot = loot;
+        m_CurrentLoot = loot;
     }
 
     private void SetStartButtonActive(bool active)
     {
-        m_raycaster.eventRaycastHit -= StartButtonPressed;
+        m_Raycaster.eventRaycastHit -= StartButtonPressed;
         startButton.SetActive(active);
         if (active)
         {
-            m_raycaster.eventRaycastHit += StartButtonPressed;
+            m_Raycaster.eventRaycastHit += StartButtonPressed;
         }
     }
 }

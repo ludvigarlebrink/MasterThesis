@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float SpeedModifier = 0.1f;
-    public float ModifyTime = 5.0f;
+    public float speedModifier = 0.1f;
+    public float modifyTime = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class Obstacle : MonoBehaviour
             NavFollow follow = other.GetComponentInParent<NavFollow>();
             if (follow)
             {
-                follow.SetSpeedModifier(SpeedModifier, ModifyTime);
+                follow.SetSpeedModifier(speedModifier, modifyTime);
             }
         }
     }
