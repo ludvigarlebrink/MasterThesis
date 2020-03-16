@@ -8,6 +8,8 @@ using Vuforia;
 
 public class AreaManager : MonoBehaviour
 {
+    [SerializeField] private Transform m_SpawnPosition;
+
     private PlayerRaycaster m_raycaster;
     private Timer m_timer;
     private float m_currentTimer = 0;
@@ -34,8 +36,7 @@ public class AreaManager : MonoBehaviour
     public event Action eventStartTimer;
     public event Action eventEndTimer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         m_timer = GetComponent<Timer>();
         m_raycaster = GetComponent<PlayerRaycaster>();
@@ -49,12 +50,6 @@ public class AreaManager : MonoBehaviour
         {
             m_raycaster.eventRaycastHit += StartButtonPressed;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnCountDownEnd()
@@ -106,7 +101,7 @@ public class AreaManager : MonoBehaviour
     {
         if (/*m_tracking &&*/ !m_Running)
         {
-            m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", transform.parent.TransformPoint(new Vector3(-0.065f, 0.0f, -0.217f)), Quaternion.identity);
+            m_burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", m_SpawnPosition.position, Quaternion.identity);
             m_burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
             m_burglar.GetComponent<LootCollector>().Setup(this);
 
