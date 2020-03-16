@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootCollector : MonoBehaviour
 {
-    public int m_lootCounter;
+    public int m_LootCounter;
     public AreaManager manager;
 
     // Start is called before the first frame update
@@ -32,16 +32,16 @@ public class LootCollector : MonoBehaviour
 
     public void IncreaseLoot(int increase)
     {
-        m_lootCounter += increase;
+        m_LootCounter += increase;
     }
 
     public void ResetLoot()
     {
-        m_lootCounter = 0;
+        m_LootCounter = 0;
     }
 
     private void SendLootScore()
     {
-        manager.SetCurrentLoot(m_lootCounter);
+        manager.SetCurrentLoot(m_LootCounter);
     }
 }
