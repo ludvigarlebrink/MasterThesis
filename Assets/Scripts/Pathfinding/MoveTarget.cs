@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveTarget : MonoBehaviour
 {
     public LayerMask hitLayers;
-    void Update()
+    
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))//If the player has left clicked
         {

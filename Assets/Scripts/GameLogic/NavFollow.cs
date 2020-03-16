@@ -8,44 +8,68 @@ public class NavFollow : MonoBehaviour
 {
     public Pathfinding pathfinder;
     public LayerMask raycastMask;
-    public AreaManager manager;
+    public AreaManager areaManager;
     public SpriteMask timerMask;
     public SpriteMask noiseMask;
 
-    private float m_CurrentNoise;
+    private float m_CurrentNoise = 0.0f;
+    private bool m_Stopped = true;
+    private float m_BaseSpeed = 0.5f;
+    private List<Vector3> m_CornerNodes;
+    private int m_CornersIterator = 0;
+    private float m_SpeedModifier = 1.0f;
 
-    bool m_Stopped = true;
-    float m_BaseSpeed = 0.5f;
-    List<Vector3> m_CornerNodes;
-    int m_CornersIterator = 0;
-
-    float m_SpeedModifier = 1.0f;
-
-    void Start()
+    public void Go()
     {
-
+        m_Stopped = false;
     }
 
-    public void Setup(AreaManager _manager, Pathfinding _pathfinder)
+    public void Setup(AreaManager areaManager, Pathfinding pathfinder)
     {
-        manager = _manager;
-        pathfinder = _pathfinder;
+        this.areaManager = areaManager;
+        this.pathfinder = pathfinder;
 
-        if (manager)
+        if (this.areaManager)
         {
-            manager.eventStartTimer += Go;
-            manager.eventStartTimer += ResetNoise;
-            manager.eventEndTimer += Stop;
+            this.areaManager.eventStartTimer += Go;
+            this.areaManager.eventStartTimer += ResetNoise;
+            this.areaManager.eventEndTimer += Stop;
         }
 
         Stop();
     }
 
-    void Update()
+    private void ResetNoise()
     {
-        if (timerMask && manager)
+        m_CurrentNoise = 0;
+    }
+
+    public void Stop()
+    {
+        m_Stopped = true;
+    }
+
+    public void SetSpeedModifier(float modifier, float seconds)
+    {
+        if (modifier <= 0)
         {
-            timerMask.alphaCutoff = manager.remainingTimeFraction;
+            modifier = float.Epsilon;
+        }
+        StartCoroutine(ModifySpeedCoroutine(modifier, seconds));
+    }
+
+    private IEnumerator ModifySpeedCoroutine(float modifier, float seconds)
+    {
+        m_SpeedModifier *= modifier;
+        yield return new WaitForSeconds(seconds);
+        m_SpeedModifier /= modifier;
+    }
+
+    private void Update()
+    {
+        if (timerMask && areaManager)
+        {
+            timerMask.alphaCutoff = areaManager.remainingTimeFraction;
         }
 
         if (noiseMask)
@@ -92,36 +116,5 @@ public class NavFollow : MonoBehaviour
             m_CurrentNoise -= 0.25f * Time.deltaTime;
             Mathf.Clamp01(m_CurrentNoise);
         }
-    }
-
-    public void Go()
-    {
-        m_Stopped = false;
-    }
-
-    public void Stop()
-    {
-        m_Stopped = true;
-    }
-
-    private void ResetNoise()
-    {
-        m_CurrentNoise = 0;
-    }
-
-    public void SetSpeedModifier(float modifier, float seconds)
-    {
-        if (modifier <= 0)
-        {
-            modifier = float.Epsilon;
-        }
-        StartCoroutine(ModifySpeedCoroutine(modifier, seconds));
-    }
-
-    private IEnumerator ModifySpeedCoroutine(float modifier, float seconds)
-    {
-        m_SpeedModifier *= modifier;
-        yield return new WaitForSeconds(seconds);
-        m_SpeedModifier /= modifier;
     }
 }
