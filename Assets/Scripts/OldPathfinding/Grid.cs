@@ -163,7 +163,6 @@ public class Grid : MonoBehaviour
     //Function that draws the wireframe
     private void OnDrawGizmos()
     {
-
         Gizmos.DrawWireCube(transform.position, new Vector3(vGridWorldSize.x, 1, vGridWorldSize.y));//Draw a wire cube with the given dimensions from the Unity inspector
 
         if (NodeArray != null)//If the grid is not empty
