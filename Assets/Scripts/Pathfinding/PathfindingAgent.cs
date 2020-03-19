@@ -11,8 +11,9 @@ public class PathfindingAgent : MonoBehaviour
     private int m_CurrentIndex = 0;
     private float m_Alpha = 0.0f;
     private bool m_HasPath = false;
+    private bool m_Local = false;
 
-    public bool SetDestination(Vector3 worldSpaceDestination)
+    public bool SetDestination(Vector3 worldSpaceDestination, bool local = false)
     {
         if (pathfindingManager == null)
         {
@@ -23,9 +24,10 @@ public class PathfindingAgent : MonoBehaviour
         m_CurrentIndex = 0;
         m_Alpha = 0.0f;
 
-        m_HasPath = pathfindingManager.FindPath(transform.position, worldSpaceDestination, ref m_Path);
+        m_HasPath = pathfindingManager.FindPath(transform.position, worldSpaceDestination, ref m_Path, local);
         if (m_HasPath)
         {
+            m_Local = local;
             m_CurrentIndex = 0;
             m_Alpha = 0.0f;
         }
@@ -42,9 +44,25 @@ public class PathfindingAgent : MonoBehaviour
 
         float distance = Vector3.Distance(m_Path[m_CurrentIndex], m_Path[m_CurrentIndex + 1]);
         m_Alpha += (speed / distance) * Time.deltaTime;
-        transform.position = Vector3.Lerp(m_Path[m_CurrentIndex], m_Path[m_CurrentIndex + 1], Mathf.Min(1.0f, m_Alpha));
-        transform.rotation = Quaternion.LookRotation(Vector3.Normalize(m_Path[m_CurrentIndex] - m_Path[m_CurrentIndex + 1]), transform.up);
         
+        if (m_Local)
+        {
+            transform.localPosition = Vector3.Lerp(m_Path[m_CurrentIndex], m_Path[m_CurrentIndex + 1], Mathf.Min(1.0f, m_Alpha));
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(m_Path[m_CurrentIndex], m_Path[m_CurrentIndex + 1], Mathf.Min(1.0f, m_Alpha));
+        }
+
+        if (m_Local)
+        {
+            transform.localRotation = Quaternion.LookRotation(Vector3.Normalize(m_Path[m_CurrentIndex] - m_Path[m_CurrentIndex + 1]));
+        }
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.Normalize(m_Path[m_CurrentIndex] - m_Path[m_CurrentIndex + 1]));
+        }
+
         if (m_Alpha >= 1.0f)
         {
             m_Alpha = 0.0f;

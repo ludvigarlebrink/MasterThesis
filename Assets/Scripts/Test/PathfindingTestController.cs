@@ -11,7 +11,7 @@ public class PathfindingTestController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                GetComponent<PathfindingAgent>().SetDestination(hit.point);
+                GetComponent<PathfindingAgent>().SetDestination(hit.point, true);
             }
         }
     }

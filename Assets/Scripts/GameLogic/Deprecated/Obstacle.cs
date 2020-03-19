@@ -11,11 +11,11 @@ public class Obstacle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            NavFollow follow = other.GetComponentInParent<NavFollow>();
-            if (follow)
-            {
-                follow.SetSpeedModifier(speedModifier, modifyTime);
-            }
+        //    NavFollow follow = other.GetComponentInParent<NavFollow>();
+        //    if (follow)
+        //    {
+        //        follow.SetSpeedModifier(speedModifier, modifyTime);
+        //    }
         }
     }
 }
