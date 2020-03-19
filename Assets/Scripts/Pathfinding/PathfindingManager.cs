@@ -7,7 +7,7 @@ public class PathfindingManager : MonoBehaviour
 {
     private PathfindingGrid m_Grid = null;
 
-    public bool FindPath(Vector3 startWorldPoint, Vector3 endWorldPoint, ref List<Vector3> path)
+    public bool FindPath(Vector3 startWorldPoint, Vector3 endWorldPoint, ref List<Vector3> path, bool local)
     {
         PathfindingNode startNode = m_Grid.GetNodeFromWorldPoint(startWorldPoint);
         if (startNode == null)
@@ -51,7 +51,7 @@ public class PathfindingManager : MonoBehaviour
 
             if (currentNode == targetNode)
             {
-                path = GetFinalPath(startNode, targetNode);
+                path = GetFinalPath(startNode, targetNode, local);
                 return true;
             }
 
@@ -86,7 +86,7 @@ public class PathfindingManager : MonoBehaviour
         m_Grid = GetComponent<PathfindingGrid>();
     }
 
-    private List<Vector3> GetFinalPath(PathfindingNode startNode, PathfindingNode endNode)
+    private List<Vector3> GetFinalPath(PathfindingNode startNode, PathfindingNode endNode, bool local)
     {
         List<Vector3> cornerNodes = new List<Vector3>();
         PathfindingNode currentNode = endNode;
@@ -98,7 +98,14 @@ public class PathfindingManager : MonoBehaviour
         {
             if (xD != currentNode.gridX - currentNode.parentNode.gridX || yD != currentNode.gridZ - currentNode.parentNode.gridZ)
             {
-                cornerNodes.Add(transform.TransformPoint(currentNode.position));
+                if (local)
+                {
+                    cornerNodes.Add(currentNode.position);
+                }
+                else
+                {
+                    cornerNodes.Add(transform.TransformPoint(currentNode.position));
+                }
             }
 
             xD = currentNode.gridX - currentNode.parentNode.gridX;
@@ -107,7 +114,14 @@ public class PathfindingManager : MonoBehaviour
             currentNode = currentNode.parentNode;
         }
 
-        cornerNodes.Add(transform.TransformPoint(startNode.position));
+        if (local)
+        {
+            cornerNodes.Add(startNode.position);
+        }
+        else
+        {
+            cornerNodes.Add(transform.TransformPoint(startNode.position));
+        }
 
         cornerNodes.Reverse();
         return cornerNodes;

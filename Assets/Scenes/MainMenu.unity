@@ -2037,7 +2037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &426574480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3069,7 +3069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &701518841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3113,7 +3113,7 @@ MonoBehaviour:
   m_Player4NameText: {fileID: 825355431}
   m_StartGameButton: {fileID: 345387525}
   m_BackButton: {fileID: 159559667}
-  m_LevelToLoad: ARTest
+  m_LevelToLoad: TestPathfinding
 --- !u!225 &701518843
 CanvasGroup:
   m_ObjectHideFlags: 0

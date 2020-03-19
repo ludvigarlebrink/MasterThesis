@@ -7,12 +7,6 @@ public class LootCollector : MonoBehaviour
     public int m_LootCounter;
     public AreaManager manager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public void Setup(AreaManager _manager)
     {
         manager = _manager;

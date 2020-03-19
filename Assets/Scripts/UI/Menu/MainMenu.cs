@@ -1,9 +1,6 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum MenuState
 {
@@ -33,7 +30,6 @@ public class MainMenu : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        Screen.SetResolution(1080, 1920, false);
         PhotonNetwork.AutomaticallySyncScene = true;
 
         m_StartState.SetMainMenu(this);

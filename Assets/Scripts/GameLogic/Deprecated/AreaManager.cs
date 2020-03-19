@@ -8,7 +8,6 @@ using Vuforia;
 
 public class AreaManager : MonoBehaviour
 {
-
     public TrackableBehaviour trackableBehaviour;
     public GameObject startButton;
     public Text resultText;
@@ -44,7 +43,7 @@ public class AreaManager : MonoBehaviour
         if (/*m_tracking &&*/ !m_Running)
         {
             m_Burglar = PhotonNetwork.Instantiate("Prefabs/Gameplay/Burglar", m_SpawnPosition.position, Quaternion.identity);
-            m_Burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
+            // m_Burglar.GetComponent<NavFollow>().Setup(this, GetComponent<Pathfinding>());
             m_Burglar.GetComponent<LootCollector>().Setup(this);
 
             m_CurrentTimer = 3;
