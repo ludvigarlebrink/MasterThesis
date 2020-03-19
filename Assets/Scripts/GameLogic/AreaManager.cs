@@ -12,7 +12,6 @@ public class AreaManager : MonoBehaviour
     public TrackableBehaviour trackableBehaviour;
     public GameObject startButton;
     public Text resultText;
-    public Vector3 spawnPosition = new Vector3(-0.065f, 0.0f, -0.217f);
     public event Action eventStartTimer;
     public event Action eventEndTimer;
 
@@ -39,7 +38,6 @@ public class AreaManager : MonoBehaviour
     {
         m_CurrentNoise += increase;
     }
-
 
     public void StartButtonPressed()
     {

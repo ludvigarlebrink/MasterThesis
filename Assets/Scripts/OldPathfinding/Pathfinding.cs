@@ -75,7 +75,7 @@ public class Pathfinding : MonoBehaviour {
 
     List<Vector3> GetFinalPath(Node a_StartingNode, Node a_EndNode)
     {
-        List<Node> FinalPath = new List<Node>();//List to hold the path sequentially 
+        List<Node> FinalPath = new List<Node>();
         List<Vector3> CornerNodes = new List<Vector3>();
         Node CurrentNode = a_EndNode;//Node to store the current node being checked
 
