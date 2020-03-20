@@ -2879,7 +2879,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 561750159}
-  - {fileID: 1685983983}
+  - {fileID: 4811400855110896454}
   - {fileID: 565932908}
   - {fileID: 1889377119}
   - {fileID: 63893360}
@@ -3779,6 +3779,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1543913209}
+    - target: {fileID: 9125814342505501425, guid: 7123f8df879843546b063bbf73a7bda4,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7123f8df879843546b063bbf73a7bda4, type: 3}
 --- !u!1 &1308878153
@@ -5098,12 +5103,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1685983983 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4811400853562546602, guid: f7e0cb61dbd00b34d8f2fc88326bd908,
-    type: 3}
-  m_PrefabInstance: {fileID: 4811400855110896453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1705577616
 GameObject:
   m_ObjectHideFlags: 0
@@ -6664,6 +6663,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 121706367, guid: 6836a1e21fc650e449ff772e4904e026, type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 388397737934834307, guid: 6836a1e21fc650e449ff772e4904e026,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6830,6 +6833,11 @@ PrefabInstance:
       objectReference: {fileID: 561750160}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7e0cb61dbd00b34d8f2fc88326bd908, type: 3}
+--- !u!4 &4811400855110896454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 4811400855110896453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5343940197171959944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6837,6 +6845,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 172629909, guid: 6d018a5e84977de4f934dade2db076e4, type: 3}
+      propertyPath: viewIdField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4692486005770120828, guid: 6d018a5e84977de4f934dade2db076e4,
         type: 3}
       propertyPath: m_Name
@@ -6921,6 +6933,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2015990237, guid: 3857aad7e7c1b4740ba24bf5f4aeb48d, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5717433155113098672, guid: 3857aad7e7c1b4740ba24bf5f4aeb48d,
         type: 3}
       propertyPath: m_LocalPosition.x
