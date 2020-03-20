@@ -7,6 +7,7 @@ public enum Space
     World
 }
 
+[RequireComponent(typeof(PhotonView))]
 public class TransformSubject : MonoBehaviour, IPunObservable
 {
     public Space m_Space = Space.Local;
@@ -18,13 +19,10 @@ public class TransformSubject : MonoBehaviour, IPunObservable
     private float m_Distance;
     private float m_Angle;
     private PhotonView m_PhotonView;
-
     private Vector3 m_Direction;
     private Vector3 m_NetworkPosition;
     private Vector3 m_StoredPosition;
-
     private Quaternion m_NetworkRotation;
-
     private bool m_FirstTake = false;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
