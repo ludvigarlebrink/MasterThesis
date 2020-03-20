@@ -26,6 +26,8 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     private WorldManager m_WorldManager = null;
     private PhotonView m_PhotonView = null;
 
+    private bool m_IsSetup = false;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -36,6 +38,15 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         {
             ReadStream(stream);
         }
+    }
+
+    private void OnStartSlumButton()
+    {
+        m_WorldManager.startSlumButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelSlum.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.slumStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
     }
 
     private void ReadStream(PhotonStream stream)
@@ -60,7 +71,6 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     {
                         thief.SetActive(true);
                         thief.transform.parent = obj.transform;
-
                     }
                 }
 
@@ -75,6 +85,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         if (!m_WorldManager)
         {
             Debug.LogError("No WorldManager in scene!");
+            return;
         }
 
         m_PhotonView = GetComponent<PhotonView>();
@@ -82,6 +93,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void Update()
     {
+        if (!m_IsSetup && m_PhotonView.IsMine)
+        {
+            m_WorldManager.startSlumButton.onClick.AddListener(OnStartSlumButton);
+            m_IsSetup = true;
+        }
+
         if (!thief)
         {
             foreach (PathfindingAgent t in FindObjectsOfType<PathfindingAgent>())
@@ -103,28 +120,14 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         if (m_PhotonView.IsMine)
         {
-            if (levelIndex == LevelIndex.None)
+            if (levelIndex != LevelIndex.None)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                    if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
                     {
                         m_ThiefPathfindingAgent.SetDestination(hit.point, true);
-                    }
-                }
-            }
-            else
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out RaycastHit hit))
-                    {
-                        if (hit.collider.gameObject.GetComponent<StartLevel>())
-                        {
-                            // Start the level.
-                        }
                     }
                 }
             }

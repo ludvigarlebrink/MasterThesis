@@ -3,16 +3,27 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject levelBank;
-    [SerializeField] private GameObject levelBlackMarket;
-    [SerializeField] private GameObject levelHarbour;
-    [SerializeField] private GameObject levelJewlery;
-    [SerializeField] private GameObject levelMarket;
-    [SerializeField] private GameObject levelMuseum;
-    [SerializeField] private GameObject levelSlum;
+    public GameObject levelBank;
+    public GameObject levelBlackMarket;
+    public GameObject levelHarbour;
+    public GameObject levelJewlery;
+    public GameObject levelMarket;
+    public GameObject levelMuseum;
+    public GameObject levelSlum;
+
+    public Transform slumStartPosition;
+
+    public Button startBankButton;
+    public Button startBlackMarketButton;
+    public Button startHarbourButton;
+    public Button startJewleryButton;
+    public Button startMarketButton;
+    public Button startMuseumButton;
+    public Button startSlumButton;
 
     public GameObject GetLevel(LevelIndex levelIndex)
     {
@@ -66,7 +77,7 @@ public class WorldManager : MonoBehaviourPunCallbacks
                     return;
                 }
 
-                GameObject thiefObject = PhotonNetwork.Instantiate("Prefabs/Theif", Vector3.zero, Quaternion.identity);
+                GameObject thiefObject = PhotonNetwork.Instantiate("Prefabs/Thief", Vector3.zero, Quaternion.identity);
                 
                 PhotonView thiefPhotonView = thiefObject.GetComponent<PhotonView>();
                 if (!thiefPhotonView)

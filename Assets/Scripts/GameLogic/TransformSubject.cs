@@ -45,7 +45,6 @@ public class TransformSubject : MonoBehaviour, IPunObservable
                     stream.SendNext(transform.position);
                     stream.SendNext(m_Direction);
                 }
-
             }
 
             if (m_SynchronizeRotation)
