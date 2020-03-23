@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="Grid_BlackMarket_Noise" size="20.000000 20.000000" />
+    <ImageTarget name="Grid_Harbour_Noise" size="20.000000 20.000000" />
+    <ImageTarget name="Grid_Market_Noise" size="20.000000 20.000000" />
+    <ImageTarget name="Grid_Slum_Noise_02" size="20.000000 20.000000" />
     <ImageTarget name="Grid_Slum_Noise" size="20.000000 20.000000" />
     <ImageTarget name="Grid_BlackMarket" size="20.000000 20.000000" />
     <ImageTarget name="Grid_Harbour" size="20.000000 20.000000" />
