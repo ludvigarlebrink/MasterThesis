@@ -18,12 +18,6 @@ public class LootCollector : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void IncreaseLoot(int increase)
     {
         m_LootCounter += increase;

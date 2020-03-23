@@ -66,3 +66,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32357f69f1c6c8747abdbd483f2dfeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thief: {fileID: 0}
+  levelIndex: 0

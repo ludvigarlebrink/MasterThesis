@@ -3113,7 +3113,7 @@ MonoBehaviour:
   m_Player4NameText: {fileID: 825355431}
   m_StartGameButton: {fileID: 345387525}
   m_BackButton: {fileID: 159559667}
-  m_LevelToLoad: TestPathfinding
+  m_LevelToLoad: SuperScene
 --- !u!225 &701518843
 CanvasGroup:
   m_ObjectHideFlags: 0
