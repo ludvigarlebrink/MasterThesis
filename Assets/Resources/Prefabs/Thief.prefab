@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 926037897313432980}
   - component: {fileID: -2142012021231904135}
   - component: {fileID: 926037897313432985}
+  - component: {fileID: -4333448847623658441}
   m_Layer: 0
   m_Name: Thief
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,6 +87,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathfindingManager: {fileID: 0}
   speed: 4
+--- !u!114 &-4333448847623658441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926037897313432987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c36483eb51dc074fa90b3ea5547aad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LootCounter: 0
+  manager: {fileID: 0}
 --- !u!1 &926037898547146300
 GameObject:
   m_ObjectHideFlags: 0

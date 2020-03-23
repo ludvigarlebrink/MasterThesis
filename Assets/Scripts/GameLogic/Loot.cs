@@ -8,6 +8,7 @@ public class Loot : MonoBehaviour
     Color m_ActiveColor;
 
     public AreaManager manager;
+    public int amount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class Loot : MonoBehaviour
             LootCollector collector = other.GetComponentInParent<LootCollector>();
             if (collector)
             {
-                collector.IncreaseLoot(1);
+                collector.IncreaseLoot(amount);
                 m_Collected = true;
                 GetComponent<MeshRenderer>().material.color = Color.gray;
             }
