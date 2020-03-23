@@ -1,7 +1,5 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +13,12 @@ public class WorldManager : MonoBehaviourPunCallbacks
     public GameObject levelMuseum;
     public GameObject levelSlum;
 
+    public Transform bankStartPosition;
+    public Transform blackMarketStartPosition;
+    public Transform harbourStartPosition;
+    public Transform jewleryStartPosition;
+    public Transform marketStartPosition;
+    public Transform museumStartPosition;
     public Transform slumStartPosition;
 
     public Button startBankButton;
@@ -89,10 +93,5 @@ public class WorldManager : MonoBehaviourPunCallbacks
                 thiefPhotonView.TransferOwnership(player);
             }
         }
-    }
-
-    private void Update()
-    {
-
     }
 }

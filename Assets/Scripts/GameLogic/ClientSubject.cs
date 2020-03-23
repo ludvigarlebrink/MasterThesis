@@ -40,6 +40,60 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
     }
 
+    private void OnStartBankButton()
+    {
+        m_WorldManager.startBankButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelBank.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.bankStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
+    private void OnStartBlackMarketButton()
+    {
+        m_WorldManager.startBlackMarketButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelBlackMarket.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.blackMarketStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
+    private void OnStartHarbourButton()
+    {
+        m_WorldManager.startHarbourButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelHarbour.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.harbourStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
+    private void OnStartJewleryButton()
+    {
+        m_WorldManager.startJewleryButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelJewlery.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.jewleryStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
+    private void OnStartMarketButton()
+    {
+        m_WorldManager.startMarketButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelMarket.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.marketStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
+    private void OnStartMuseumButton()
+    {
+        m_WorldManager.startMuseumButton.gameObject.SetActive(false);
+        m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelMuseum.transform;
+        m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.museumStartPosition.localPosition;
+        m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
+        levelIndex = LevelIndex.Slum;
+    }
+
     private void OnStartSlumButton()
     {
         m_WorldManager.startSlumButton.gameObject.SetActive(false);
@@ -93,42 +147,87 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if (!m_IsSetup && m_PhotonView.IsMine)
-        {
-            m_WorldManager.startSlumButton.onClick.AddListener(OnStartSlumButton);
-            m_IsSetup = true;
-        }
-
         if (!thief)
         {
-            foreach (PathfindingAgent t in FindObjectsOfType<PathfindingAgent>())
-            {
-                PhotonView photonView = t.GetComponent<PhotonView>();
-                if (photonView && m_PhotonView.OwnerActorNr == photonView.OwnerActorNr)
-                {
-                    thief = photonView.gameObject;
-                    m_ThiefPathfindingAgent = thief.GetComponent<PathfindingAgent>();
-                    if (!m_ThiefPathfindingAgent)
-                    {
-                        Debug.LogError("No pathfinding agent found in thief object.");
-                    }
-                }
-            }
-
+            SetupThief();
             return;
         }
 
-        if (m_PhotonView.IsMine)
+        if (!m_PhotonView.IsMine)
         {
-            if (levelIndex != LevelIndex.None)
+            return;
+        }
+
+        if (!m_IsSetup)
+        {
+            Setup();
+        }
+
+        if (levelIndex != LevelIndex.None)
+        {
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                    if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
-                    {
-                        m_ThiefPathfindingAgent.SetDestination(hit.point, true);
-                    }
+                    m_ThiefPathfindingAgent.SetDestination(hit.point, true);
+                }
+            }
+        }
+    }
+
+    private void Setup()
+    {
+        if (m_WorldManager.startBankButton != null)
+        {
+            m_WorldManager.startBankButton.onClick.AddListener(OnStartBankButton);
+        }
+
+        if (m_WorldManager.startBlackMarketButton != null)
+        {
+            m_WorldManager.startBlackMarketButton.onClick.AddListener(OnStartBlackMarketButton);
+        }
+
+        if (m_WorldManager.startHarbourButton != null)
+        {
+            m_WorldManager.startHarbourButton.onClick.AddListener(OnStartHarbourButton);
+        }
+
+        if (m_WorldManager.startJewleryButton != null)
+        {
+            m_WorldManager.startJewleryButton.onClick.AddListener(OnStartJewleryButton);
+        }
+
+        if (m_WorldManager.startMarketButton != null)
+        {
+            m_WorldManager.startMarketButton.onClick.AddListener(OnStartMarketButton);
+        }
+
+        if (m_WorldManager.startMuseumButton != null)
+        {
+            m_WorldManager.startMuseumButton.onClick.AddListener(OnStartMuseumButton);
+        }
+
+        if (m_WorldManager.startSlumButton != null)
+        {
+            m_WorldManager.startSlumButton.onClick.AddListener(OnStartSlumButton);
+        }
+
+        m_IsSetup = true;
+    }
+
+    private void SetupThief()
+    {
+        foreach (PathfindingAgent t in FindObjectsOfType<PathfindingAgent>())
+        {
+            PhotonView photonView = t.GetComponent<PhotonView>();
+            if (photonView && m_PhotonView.OwnerActorNr == photonView.OwnerActorNr)
+            {
+                thief = photonView.gameObject;
+                m_ThiefPathfindingAgent = thief.GetComponent<PathfindingAgent>();
+                if (!m_ThiefPathfindingAgent)
+                {
+                    Debug.LogError("No pathfinding agent found in thief object.");
                 }
             }
         }

@@ -412,6 +412,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &184030943 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7833843577024128826, guid: 6d018a5e84977de4f934dade2db076e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 184030941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &184030944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3243753796879214954, guid: 6d018a5e84977de4f934dade2db076e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 184030941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &460785823
 Mesh:
   m_ObjectHideFlags: 0
@@ -662,6 +674,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8853635653796176531, guid: 3857aad7e7c1b4740ba24bf5f4aeb48d,
+        type: 3}
+      propertyPath: m_Name
+      value: SlumStartPosition
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3857aad7e7c1b4740ba24bf5f4aeb48d, type: 3}
 --- !u!114 &505209014 stripped
@@ -895,18 +912,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBank: {fileID: 0}
-  levelBlackMarket: {fileID: 0}
-  levelHarbour: {fileID: 0}
+  levelBlackMarket: {fileID: 184030944}
+  levelHarbour: {fileID: 2126090368}
   levelJewlery: {fileID: 0}
-  levelMarket: {fileID: 0}
+  levelMarket: {fileID: 1394623622}
   levelMuseum: {fileID: 0}
   levelSlum: {fileID: 505209016}
+  bankStartPosition: {fileID: 0}
+  blackMarketStartPosition: {fileID: 184030943}
+  harbourStartPosition: {fileID: 2126090367}
+  jewleryStartPosition: {fileID: 0}
+  marketStartPosition: {fileID: 1394623621}
+  museumStartPosition: {fileID: 0}
   slumStartPosition: {fileID: 505209015}
   startBankButton: {fileID: 0}
   startBlackMarketButton: {fileID: 184030942}
-  startHarbourButton: {fileID: 0}
+  startHarbourButton: {fileID: 2126090366}
   startJewleryButton: {fileID: 0}
-  startMarketButton: {fileID: 0}
+  startMarketButton: {fileID: 1394623620}
   startMuseumButton: {fileID: 0}
   startSlumButton: {fileID: 505209014}
 --- !u!1 &1338649470
@@ -1093,6 +1116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3725272525468629305, guid: 7123f8df879843546b063bbf73a7bda4,
+        type: 3}
+      propertyPath: m_Name
+      value: MarketStartPosition
+      objectReference: {fileID: 0}
     - target: {fileID: 6151127511564176068, guid: 7123f8df879843546b063bbf73a7bda4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1163,8 +1191,37 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 654686503}
+    - target: {fileID: 6151127511795051751, guid: 7123f8df879843546b063bbf73a7bda4,
+        type: 3}
+      propertyPath: m_Name
+      value: MarketGrid
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7123f8df879843546b063bbf73a7bda4, type: 3}
+--- !u!114 &1394623620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2653592736939178949, guid: 7123f8df879843546b063bbf73a7bda4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1394623619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1394623621 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8555762779467593280, guid: 7123f8df879843546b063bbf73a7bda4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1394623619}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1394623622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6151127511795051751, guid: 7123f8df879843546b063bbf73a7bda4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1394623619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!21 &1613063637
 Material:
   serializedVersion: 6
@@ -1592,3 +1649,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6836a1e21fc650e449ff772e4904e026, type: 3}
+--- !u!114 &2126090366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6558752862115378735, guid: 6836a1e21fc650e449ff772e4904e026,
+    type: 3}
+  m_PrefabInstance: {fileID: 2126090365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2126090367 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2682779661111718656, guid: 6836a1e21fc650e449ff772e4904e026,
+    type: 3}
+  m_PrefabInstance: {fileID: 2126090365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2126090368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 388397737466665956, guid: 6836a1e21fc650e449ff772e4904e026,
+    type: 3}
+  m_PrefabInstance: {fileID: 2126090365}
+  m_PrefabAsset: {fileID: 0}
