@@ -661,13 +661,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
-  gridWorldSizeX: 10
-  gridWorldSizeZ: 10
-  nodeRadius: 0.5
-  distanceBetweenNodes: 2
-  m_GridSizeX: 0
-  m_GridSizeZ: 0
+    m_Bits: 512
+  gridWorldSizeX: 20
+  gridWorldSizeZ: 20
+  nodeRadius: 0.3
+  distanceBetweenNodes: 1
+  m_GridSizeX: 20
+  m_GridSizeZ: 20
 --- !u!114 &6614998897287971229
 MonoBehaviour:
   m_ObjectHideFlags: 0

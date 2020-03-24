@@ -46,7 +46,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelBank.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.bankStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.Bank;
     }
 
     private void OnStartBlackMarketButton()
@@ -55,7 +55,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelBlackMarket.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.blackMarketStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.BlackMarket;
     }
 
     private void OnStartHarbourButton()
@@ -64,7 +64,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelHarbour.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.harbourStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.Harbour;
     }
 
     private void OnStartJewleryButton()
@@ -73,7 +73,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelJewlery.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.jewleryStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.Jewlery;
     }
 
     private void OnStartMarketButton()
@@ -82,7 +82,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelMarket.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.marketStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.Market;
     }
 
     private void OnStartMuseumButton()
@@ -91,7 +91,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.parent = m_WorldManager.levelMuseum.transform;
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.museumStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
-        levelIndex = LevelIndex.Slum;
+        levelIndex = LevelIndex.Museum;
     }
 
     private void OnStartSlumButton()
@@ -218,7 +218,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void SetupThief()
     {
-        foreach (PathfindingAgent t in FindObjectsOfType<PathfindingAgent>())
+        foreach (Thief t in FindObjectsOfType<Thief>())
         {
             PhotonView photonView = t.GetComponent<PhotonView>();
             if (photonView && m_PhotonView.OwnerActorNr == photonView.OwnerActorNr)
