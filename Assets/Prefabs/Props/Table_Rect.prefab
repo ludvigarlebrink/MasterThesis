@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4488150789428151942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Table_Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: table
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 0bc1777861e859743b6a6194fdefa12d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc1777861e859743b6a6194fdefa12d, type: 3}

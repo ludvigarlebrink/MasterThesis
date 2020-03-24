@@ -1,19 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!64 &2493439637309506374
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8415541228263773167}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3540158962991828805, guid: 406c71de9df1f3f4aa04c81a9edcfa91, type: 3}
 --- !u!1 &3659615145189564847
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2297808308073464859}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +31,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2493439637309506374
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415541228263773167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3540158962991828805, guid: 406c71de9df1f3f4aa04c81a9edcfa91, type: 3}
 --- !u!1001 &570812830335257318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: fountainRoundDetail
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 406c71de9df1f3f4aa04c81a9edcfa91,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 406c71de9df1f3f4aa04c81a9edcfa91, type: 3}

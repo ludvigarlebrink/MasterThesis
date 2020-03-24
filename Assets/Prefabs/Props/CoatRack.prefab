@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3665446347774989450}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CoatRack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: coatRackStanding
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7f171818be81afd47b335b1b76a691af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f171818be81afd47b335b1b76a691af, type: 3}
