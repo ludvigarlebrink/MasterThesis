@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 926037897313432984}
   - component: {fileID: 926037897313432980}
   - component: {fileID: -2142012021231904135}
-  - component: {fileID: 926037897313432985}
-  - component: {fileID: -4333448847623658441}
+  - component: {fileID: -8874155140984436805}
   m_Layer: 0
   m_Name: Thief
   m_TagString: Player
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926037897313432987}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.49, y: 0, z: 7.492}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 926037898547146301}
@@ -54,6 +53,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -2142012021231904135}
+  - {fileID: -2142012021231904135}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &926037897313432985
+--- !u!114 &-8874155140984436805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,25 +82,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 926037897313432987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a9ea58cbb28e64cb329f904d4881b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 44957e157b550234ea1e5adc6aad14f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfindingManager: {fileID: 0}
-  speed: 4
---- !u!114 &-4333448847623658441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926037897313432987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c36483eb51dc074fa90b3ea5547aad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LootCounter: 0
-  manager: {fileID: 0}
 --- !u!1 &926037898547146300
 GameObject:
   m_ObjectHideFlags: 0
