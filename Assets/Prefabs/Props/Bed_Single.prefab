@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6353755261034104446}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bed_Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +52,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6353755261034104446}
     m_Modifications:
+    - target: {fileID: -8927471539879334508, guid: c989b28131298844cb5df73238505872,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c989b28131298844cb5df73238505872,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -111,6 +116,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bedSingle
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c989b28131298844cb5df73238505872,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334764585934320612, guid: c989b28131298844cb5df73238505872,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c989b28131298844cb5df73238505872, type: 3}

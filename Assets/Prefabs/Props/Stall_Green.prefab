@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543851228314399846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stall_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: stallGreen
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c7789dab226ed1e4280773ba4bca155d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7789dab226ed1e4280773ba4bca155d, type: 3}

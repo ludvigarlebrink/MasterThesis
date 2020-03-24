@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4212603163417868283}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BookCase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,26 +39,12 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5284905270973393237}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3972999176631296382, guid: fed40bd9993a77048b76ad29d6cc5a60, type: 3}
---- !u!114 &5754362951078174526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5284905270973393237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79f8925e638237441b7b22b8dc701393, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  amount: 1
 --- !u!1001 &4212603161518157916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -125,6 +111,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bookcaseClosed
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fed40bd9993a77048b76ad29d6cc5a60,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fed40bd9993a77048b76ad29d6cc5a60, type: 3}
