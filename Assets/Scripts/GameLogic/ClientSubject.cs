@@ -1,7 +1,4 @@
 ﻿using Photon.Pun;
-using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum LevelIndex
@@ -19,13 +16,15 @@ public enum LevelIndex
 [RequireComponent(typeof(PhotonView))]
 public class ClientSubject : MonoBehaviour, IPunObservable
 {
-    public GameObject thief = null;
+    public GameObject thiefObject = null;
     public LevelIndex levelIndex = LevelIndex.None;
 
-    private PathfindingAgent m_ThiefPathfindingAgent;
+    private Thief m_Thief = null;
+    private PathfindingAgent m_ThiefPathfindingAgent = null;
     private WorldManager m_WorldManager = null;
     private PhotonView m_PhotonView = null;
 
+    private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -40,6 +39,16 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
     }
 
+    private void OnReachedDestination()
+    {
+        if (m_IsMovingTowardsLootObject)
+        {
+            m_Thief.currentLoot += 1;
+            m_Thief.currentNoise += 0.1f;
+            m_IsMovingTowardsLootObject = false;
+        }
+    }
+
     private void OnStartBankButton()
     {
         m_WorldManager.startBankButton.gameObject.SetActive(false);
@@ -47,6 +56,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.bankStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Bank;
+        m_Thief.ResetThief();
     }
 
     private void OnStartBlackMarketButton()
@@ -56,6 +66,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.blackMarketStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.BlackMarket;
+        m_Thief.ResetThief();
     }
 
     private void OnStartHarbourButton()
@@ -65,6 +76,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.harbourStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Harbour;
+        m_Thief.ResetThief();
     }
 
     private void OnStartJewleryButton()
@@ -74,6 +86,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.jewleryStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Jewlery;
+        m_Thief.ResetThief();
     }
 
     private void OnStartMarketButton()
@@ -83,6 +96,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.marketStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Market;
+        m_Thief.ResetThief();
     }
 
     private void OnStartMuseumButton()
@@ -92,6 +106,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.museumStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Museum;
+        m_Thief.ResetThief();
     }
 
     private void OnStartSlumButton()
@@ -101,6 +116,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.transform.localPosition = m_WorldManager.slumStartPosition.localPosition;
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Slum;
+        m_Thief.ResetThief();
     }
 
     private void ReadStream(PhotonStream stream)
@@ -108,14 +124,14 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         LevelIndex state = (LevelIndex)stream.ReceiveNext();
         if (state != levelIndex)
         {
-            if (thief)
+            if (thiefObject)
             {
                 if (state == LevelIndex.None)
                 {
-                    thief.SetActive(false);
+                    thiefObject.SetActive(false);
 
                     // Set it in root node.
-                    thief.transform.parent = null;
+                    thiefObject.transform.parent = null;
                 }
                 else
                 {
@@ -123,8 +139,8 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
                     if (obj)
                     {
-                        thief.SetActive(true);
-                        thief.transform.parent = obj.transform;
+                        thiefObject.SetActive(true);
+                        thiefObject.transform.parent = obj.transform;
                     }
                 }
 
@@ -147,7 +163,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void Update()
     {
-        if (!thief)
+        if (!thiefObject)
         {
             SetupThief();
             return;
@@ -170,7 +186,17 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
                 if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
                 {
-                    m_ThiefPathfindingAgent.SetDestination(hit.point, true);
+                    if (hit.collider.tag == "Ground")
+                    {
+                        m_ThiefPathfindingAgent.SetDestination(hit.point, true);
+                        m_IsMovingTowardsLootObject = false;
+                    }
+                    else if (hit.collider.GetComponent<Loot>())
+                    {
+                        Loot loot = hit.collider.GetComponent<Loot>();
+                        m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
+                        m_IsMovingTowardsLootObject = false;
+                    }
                 }
             }
         }
@@ -223,8 +249,11 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             PhotonView photonView = t.GetComponent<PhotonView>();
             if (photonView && m_PhotonView.OwnerActorNr == photonView.OwnerActorNr)
             {
-                thief = photonView.gameObject;
-                m_ThiefPathfindingAgent = thief.GetComponent<PathfindingAgent>();
+                m_Thief = t;
+                thiefObject = t.gameObject;
+                m_ThiefPathfindingAgent = thiefObject.GetComponent<PathfindingAgent>();
+                m_ThiefPathfindingAgent.onReachedDestination.AddListener(OnReachedDestination);
+
                 if (!m_ThiefPathfindingAgent)
                 {
                     Debug.LogError("No pathfinding agent found in thief object.");

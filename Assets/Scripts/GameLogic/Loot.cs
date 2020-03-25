@@ -4,47 +4,16 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-    bool m_Collected;
-    Color m_ActiveColor;
+    [SerializeField] private Transform m_Point;
 
-    public AreaManager manager;
-    public int amount = 1;
-
-    // Start is called before the first frame update
-    void Start()
+    public Vector3 GetPosition()
     {
-        m_Collected = false;
-        m_ActiveColor = GetComponent<MeshRenderer>().material.color;
-
-        if (manager)
+        if (m_Point == null)
         {
-            manager.eventStartTimer += ResetLoot;
+            Debug.LogError("No point setup in Loot component.");
+            return Vector3.zero;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && !m_Collected)
-        {
-            LootCollector collector = other.GetComponentInParent<LootCollector>();
-            if (collector)
-            {
-                collector.IncreaseLoot(amount);
-                m_Collected = true;
-                GetComponent<MeshRenderer>().material.color = Color.gray;
-            }
-        }
-    }
-
-    private void ResetLoot()
-    {
-        m_Collected = false;
-        GetComponent<MeshRenderer>().material.color = m_ActiveColor;
+        return transform.InverseTransformPoint(m_Point.position);
     }
 }
