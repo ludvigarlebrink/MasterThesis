@@ -11,7 +11,7 @@ public class NoiseSource : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            manager.IncreaseCurrentNoise(noiseIncrease);
+
         }
     }
 }
