@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PathfindingAgent : MonoBehaviour
 {
     public PathfindingManager pathfindingManager = null;
     public float speed = 4.0f;
+    public UnityEvent onReachedDestination;
+    public UnityEvent onPathCancelled;
 
     private List<Vector3> m_Path;
     private int m_CurrentIndex = 0;
@@ -72,6 +75,7 @@ public class PathfindingAgent : MonoBehaviour
             {
                 m_CurrentIndex = 0;
                 m_HasPath = false;
+                onReachedDestination.Invoke();
             }
         }
     }
