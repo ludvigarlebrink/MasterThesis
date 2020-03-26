@@ -87,6 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44957e157b550234ea1e5adc6aad14f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLoot: 0
+  currentNoise: 0
 --- !u!114 &7819638903840334304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +103,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathfindingManager: {fileID: 0}
   speed: 4
+  onReachedDestination:
+    m_PersistentCalls:
+      m_Calls: []
+  onPathCancelled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &926037898547146300
 GameObject:
   m_ObjectHideFlags: 0

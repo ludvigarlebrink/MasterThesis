@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 6151127511564176079}
   m_Layer: 0
   m_Name: ImageTarget_Market
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,9 +512,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTrackableName: Grid_Market_Noise
-  mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MasterThesis_GridBased.xml
+  mPreserveChildSize: 0
   mAspectRatio: 1
   mImageTargetType: 0
   mWidth: 20
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 6614998897287971229}
   m_Layer: 0
   m_Name: MarketGrid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8772,6 +8772,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4893988953750730237, guid: 83dba8db16b6be24893283c173acea04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83dba8db16b6be24893283c173acea04, type: 3}
 --- !u!4 &8439033686165611653 stripped
@@ -12596,6 +12601,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893988953750730237, guid: 83dba8db16b6be24893283c173acea04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83dba8db16b6be24893283c173acea04, type: 3}
