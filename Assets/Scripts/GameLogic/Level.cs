@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour, IPunObservable
 {
+    [SerializeField] private Button m_StartButton;
     private PhotonView m_PhotonView = null;
     private int m_ActorNr = -1;
 
