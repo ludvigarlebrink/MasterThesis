@@ -195,7 +195,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     {
                         Loot loot = hit.collider.GetComponent<Loot>();
                         m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
-                        m_IsMovingTowardsLootObject = false;
+                        m_IsMovingTowardsLootObject = true;
                     }
                 }
             }
