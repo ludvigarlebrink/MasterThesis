@@ -7,7 +7,7 @@ public class DebugLogCanvas : MonoBehaviour
 {
     public Transform contentList;
     public GameObject debugLogPrefab;
-    public GameObject scrollView;
+    public GameObject toggleObject;
     public Text buttonText;
 
     // Start is called before the first frame update
@@ -33,7 +33,7 @@ public class DebugLogCanvas : MonoBehaviour
 
     public void ToggleScrollView()
     {
-        scrollView.SetActive(!scrollView.activeInHierarchy);
-        buttonText.text = scrollView.activeInHierarchy ? "Hide" : "Show";
+        toggleObject.SetActive(!toggleObject.activeInHierarchy);
+        buttonText.text = toggleObject.activeInHierarchy ? "Hide" : "Show";
     }
 }
