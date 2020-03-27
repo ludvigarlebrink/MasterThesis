@@ -14,6 +14,6 @@ public class Loot : MonoBehaviour
             return Vector3.zero;
         }
 
-        return transform.parent.InverseTransformPoint(m_Point.position);
+        return m_Point.position;
     }
 }
