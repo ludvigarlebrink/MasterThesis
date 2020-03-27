@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour, IPunObservable
 {
-    [SerializeField] private Button m_StartButton;
+    public Button startButton;
+
     private PhotonView m_PhotonView = null;
     private int m_ActorNr = -1;
 
@@ -70,11 +71,11 @@ public class Level : MonoBehaviour, IPunObservable
         {
             if (tmpOwner == -1)
             {
-
+                startButton.gameObject.SetActive(true);
             }
             else
             {
-
+                startButton.gameObject.SetActive(false);
             }
 
             m_ActorNr = tmpOwner;
@@ -102,12 +103,14 @@ public class Level : MonoBehaviour, IPunObservable
                 {
                     m_PhotonView.RPC("RPCOnTryingToChangeOwner", player, true);
                     m_ActorNr = actor;
+                    startButton.gameObject.SetActive(false);
                 }
             }
         }
         else if (actor == -1)
         {
             m_ActorNr = -1;
+            startButton.gameObject.SetActive(true);
         }
     }
 

@@ -31,6 +31,7 @@ MonoBehaviour:
   RpcList:
   - ClickRpc
   - DestroyRpc
+  - SetOwner
   - RPCOnTryingToChangeOwner
   - RPCSetOwner
   DisableAutoOpenWizard: 1
