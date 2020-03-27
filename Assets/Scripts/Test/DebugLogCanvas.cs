@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class DebugLogCanvas : MonoBehaviour
 {
-    public VerticalLayoutGroup contentList;
+    public Transform contentList;
     public GameObject debugLogPrefab;
+    public GameObject scrollView;
+    public Text buttonText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,10 +24,16 @@ public class DebugLogCanvas : MonoBehaviour
 
     private void DebugCallBack(string condition, string stacktrace, UnityEngine.LogType type)
     {
-        GameObject logMessage = Instantiate(debugLogPrefab, contentList.transform);
+        GameObject logMessage = Instantiate(debugLogPrefab, contentList);
         logMessage.GetComponentInChildren<Text>().text = condition;
         Color background = (type == LogType.Warning ? Color.yellow : (type == LogType.Error ? Color.red : Color.white));
         background.a = 0.4f;
         logMessage.GetComponent<Image>().color = background;
+    }
+
+    public void ToggleScrollView()
+    {
+        scrollView.SetActive(!scrollView.activeInHierarchy);
+        buttonText.text = scrollView.activeInHierarchy ? "Hide" : "Show";
     }
 }
