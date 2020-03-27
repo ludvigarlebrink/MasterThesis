@@ -194,6 +194,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     else if (hit.collider.GetComponent<Loot>())
                     {
                         Loot loot = hit.collider.GetComponent<Loot>();
+                        Debug.Log("Object : " + loot.GetPosition().ToString());
                         m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
                         m_IsMovingTowardsLootObject = true;
                     }
