@@ -25,7 +25,7 @@ public class PlayerHUD : MonoBehaviour
     private Transform m_CameraTransform;
     private float m_ReferenceDistance = 17.5f;
     private float m_ReferenceScale = 0.01f;
-    private float m_ScaleChangePerUnit = 0.0006f;
+    private float m_ScaleChangePerUnit = 0.00056f;
 
     // Start is called before the first frame update
     void Start()
