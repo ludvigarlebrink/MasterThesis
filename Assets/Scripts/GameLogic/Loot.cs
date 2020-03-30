@@ -5,6 +5,7 @@ using UnityEngine;
 public class Loot : MonoBehaviour
 {
     [SerializeField] private Transform m_Point;
+    [SerializeField] private ParticleSystem m_Particles;
 
     public Vector3 GetPosition()
     {
@@ -15,5 +16,13 @@ public class Loot : MonoBehaviour
         }
 
         return m_Point.position;
+    }
+
+    private void Start()
+    {
+        if (m_Particles != null)
+        {
+            m_Particles.Play();
+        }
     }
 }

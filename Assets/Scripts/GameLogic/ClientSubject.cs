@@ -18,11 +18,13 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 {
     public GameObject thiefObject = null;
     public LevelIndex levelIndex = LevelIndex.None;
+    public GameObject clickFeedbackPrefab = null;
 
     private Thief m_Thief = null;
     private PathfindingAgent m_ThiefPathfindingAgent = null;
     private WorldManager m_WorldManager = null;
     private PhotonView m_PhotonView = null;
+    private ParticleSystem m_ClickFeedback = null;
 
     private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
@@ -159,6 +161,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
 
         m_PhotonView = GetComponent<PhotonView>();
+        m_ClickFeedback = Instantiate(clickFeedbackPrefab).GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -198,6 +201,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                         m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
                         m_IsMovingTowardsLootObject = true;
                     }
+                    if (m_ClickFeedback.isPlaying)
+                    {
+                        m_ClickFeedback.Clear();
+                    }
+                    m_ClickFeedback.transform.position = hit.point;
+                    m_ClickFeedback.Play();
                 }
             }
         }

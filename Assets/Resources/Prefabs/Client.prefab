@@ -68,3 +68,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thiefObject: {fileID: 0}
   levelIndex: 0
+  clickFeedbackPrefab: {fileID: 3530064004722723950, guid: 42175c74d2ca7ac43a5fff109ba5f646,
+    type: 3}
