@@ -25,6 +25,8 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     private WorldManager m_WorldManager = null;
     private PhotonView m_PhotonView = null;
     private ParticleSystem m_ClickFeedback = null;
+    // Added by Chris to deactivate loot after collection
+    private Loot m_currentLootTarget = null;
 
     private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
@@ -43,11 +45,14 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void OnReachedDestination()
     {
-        if (m_IsMovingTowardsLootObject)
+        if (m_IsMovingTowardsLootObject && m_currentLootTarget != null)
         {
             m_Thief.currentLoot += 1;
             m_Thief.currentNoise += 0.1f;
             m_IsMovingTowardsLootObject = false;
+            // Collect loot
+            m_currentLootTarget.Collect();
+            m_currentLootTarget = null;
         }
     }
 
@@ -197,9 +202,13 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     else if (hit.collider.GetComponent<Loot>())
                     {
                         Loot loot = hit.collider.GetComponent<Loot>();
-                        Debug.Log("Object : " + loot.GetPosition().ToString());
-                        m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
-                        m_IsMovingTowardsLootObject = true;
+                        if (loot.Collectable)
+                        {
+                            Debug.Log("Object : " + loot.GetPosition().ToString());
+                            m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
+                            m_IsMovingTowardsLootObject = true;
+                            m_currentLootTarget = loot;
+                        }
                     }
                     if (m_ClickFeedback.isPlaying)
                     {

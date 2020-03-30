@@ -34,6 +34,11 @@ public class PathfindingAgent : MonoBehaviour
             m_CurrentIndex = 0;
             m_Alpha = 0.0f;
         }
+        // Added by Chris to enable looting when already standing near object
+        else if (pathfindingManager.GetNode(transform.position) == pathfindingManager.GetNode(worldSpaceDestination))
+        {
+            onReachedDestination.Invoke();
+        }
 
         return m_HasPath;
     }

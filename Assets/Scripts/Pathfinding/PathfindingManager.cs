@@ -81,6 +81,12 @@ public class PathfindingManager : MonoBehaviour
         return false;
     }
 
+    // Added by Chris to check if start and end positions are on the same node
+    public PathfindingNode GetNode(Vector3 worldPoint)
+    {
+        return m_Grid.GetNodeFromWorldPoint(worldPoint);
+    }
+
     private void Awake()
     {
         m_Grid = GetComponent<PathfindingGrid>();
