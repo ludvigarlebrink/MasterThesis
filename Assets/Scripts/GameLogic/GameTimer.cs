@@ -9,6 +9,31 @@ public class GameTimer : MonoBehaviour
 
     private float m_CurrentTime = 0.0f;
 
+    public string timeFormated
+    {
+        get
+        {
+            int minutes = Mathf.FloorToInt(m_CurrentTime / 60);
+            int seconds = Mathf.FloorToInt(m_CurrentTime / 60);
+
+            string value = "";
+            if (minutes <= 9)
+            {
+                value += "0";
+            }
+
+            value += minutes.ToString();
+            value += ":";
+            
+            if (seconds <= 9)
+            {
+
+            }
+
+            return value;
+        }
+    }
+
     public void StartTimer(float startTime)
     {
         m_CurrentTime = startTime;
