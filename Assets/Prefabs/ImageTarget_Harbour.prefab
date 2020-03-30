@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1984812585}
   m_Layer: 0
   m_Name: HarbourGrid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,9 +308,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTrackableName: Grid_Harbour_Noise
-  mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MasterThesis_GridBased.xml
+  mPreserveChildSize: 0
   mAspectRatio: 1
   mImageTargetType: 0
   mWidth: 20

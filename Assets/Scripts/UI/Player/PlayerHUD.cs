@@ -54,7 +54,7 @@ public class PlayerHUD : MonoBehaviour
 
     public void SetNoise(float noise)
     {
-        float anchorY = (noise * (m_NoiseBarMax - m_NoiseBarMin)) + m_NoiseBarMin;
+        float anchorY = Mathf.Clamp((noise * (m_NoiseBarMax - m_NoiseBarMin)) + m_NoiseBarMin, m_NoiseBarMin, m_NoiseBarMax);
         noiseBar.anchorMax = new Vector2(1, anchorY);
     }
 
