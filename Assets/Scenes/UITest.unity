@@ -274,8 +274,9 @@ GameObject:
   - component: {fileID: 1188238914}
   - component: {fileID: 1188238913}
   - component: {fileID: 1188238912}
+  - component: {fileID: 1188238916}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: GameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,6 +362,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1188238916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188238911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63de6eb0143fca43b069d8478d24629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TimerObject: {fileID: 0}
+  m_TimerText: {fileID: 0}
 --- !u!1 &1523119218
 GameObject:
   m_ObjectHideFlags: 0
