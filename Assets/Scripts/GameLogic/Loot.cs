@@ -6,6 +6,8 @@ public class Loot : MonoBehaviour
 {
     [SerializeField] private Transform m_Point;
     [SerializeField] private ParticleSystem m_Particles;
+    [SerializeField] private ParticleSystem m_CollectedEffect;
+
     // Added by Chris to deactivate loot after collecting
     public bool Collectable
     {
@@ -19,9 +21,11 @@ public class Loot : MonoBehaviour
         {
             return false;
         }
-        m_Particles.Stop();
-        m_Particles.Clear();
-        Collectable = false;
+        if (m_CollectedEffect != null)
+        {
+            m_CollectedEffect.Play();
+        }
+        SetCollectable(false);
         return true;
     }
 
@@ -36,12 +40,22 @@ public class Loot : MonoBehaviour
         return m_Point.position;
     }
 
-    private void Start()
+    public void SetCollectable(bool collectable)
     {
-        if (m_Particles != null)
+        Collectable = collectable;
+        if (collectable)
         {
             m_Particles.Play();
         }
-        Collectable = true;
+        else
+        {
+            m_Particles.Stop();
+            m_Particles.Clear();
+        }
+    }
+
+    private void Start()
+    {
+        Collectable = false;
     }
 }

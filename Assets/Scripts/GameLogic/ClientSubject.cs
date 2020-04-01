@@ -28,6 +28,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     // Added by Chris to deactivate loot after collection
     private Loot m_currentLootTarget = null;
 
+    private bool m_IsMoving = false;
     private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
 
@@ -53,6 +54,10 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             // Collect loot
             m_currentLootTarget.Collect();
             m_currentLootTarget = null;
+        }
+        if (m_IsMoving)
+        {
+            m_IsMoving = false;
         }
     }
 
@@ -187,6 +192,19 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             Setup();
         }
 
+        // Continuous noise change
+        if (m_Thief.currentNoise > 0)
+        {
+            m_Thief.currentNoise -= 0.05f * Time.deltaTime;
+        }
+
+        if (m_Thief.currentNoise < 1 && m_IsMoving)
+        {
+            m_Thief.currentNoise += 0.1f * Time.deltaTime;
+        }
+
+        m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
+
         if (levelIndex != LevelIndex.None)
         {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -196,8 +214,9 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                 {
                     if (hit.collider.tag == "Ground")
                     {
-                        m_ThiefPathfindingAgent.SetDestination(hit.point, true);
                         m_IsMovingTowardsLootObject = false;
+                        m_IsMoving = true;
+                        m_ThiefPathfindingAgent.SetDestination(hit.point, true);
                     }
                     else if (hit.collider.GetComponent<Loot>())
                     {
@@ -205,9 +224,10 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                         if (loot.Collectable)
                         {
                             Debug.Log("Object : " + loot.GetPosition().ToString());
-                            m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
+                            m_IsMoving = true;
                             m_IsMovingTowardsLootObject = true;
                             m_currentLootTarget = loot;
+                            m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
                         }
                     }
                     if (m_ClickFeedback.isPlaying)
