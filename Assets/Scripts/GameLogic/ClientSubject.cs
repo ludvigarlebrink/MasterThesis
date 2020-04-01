@@ -158,7 +158,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                 }
                 else
                 {
-                    GameObject obj = m_WorldManager.GetLevel(state);
+                    Level obj = m_WorldManager.GetLevel(state);
 
                     if (obj)
                     {
