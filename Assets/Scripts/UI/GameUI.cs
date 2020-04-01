@@ -20,6 +20,11 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
+        if (m_GameTimer == null)
+        {
+            return;
+        }
+
         if (m_GameTimer.currentTime > 0.0f)
         {
             m_TimerObject.SetActive(true);

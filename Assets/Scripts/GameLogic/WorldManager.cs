@@ -5,21 +5,13 @@ using UnityEngine.UI;
 
 public class WorldManager : MonoBehaviourPunCallbacks
 {
-    public Level bank;
-    public Level blackMarket;
-    public Level harbour;
-    public Level jewlery;
-    public Level market;
-    public Level museum;
-    public Level slum;
-
-    public GameObject levelBank;
-    public GameObject levelBlackMarket;
-    public GameObject levelHarbour;
-    public GameObject levelJewlery;
-    public GameObject levelMarket;
-    public GameObject levelMuseum;
-    public GameObject levelSlum;
+    public Level levelBank;
+    public Level levelBlackMarket;
+    public Level levelHarbour;
+    public Level levelJewlery;
+    public Level levelMarket;
+    public Level levelMuseum;
+    public Level levelSlum;
 
     public Transform bankStartPosition;
     public Transform blackMarketStartPosition;
@@ -37,7 +29,7 @@ public class WorldManager : MonoBehaviourPunCallbacks
     public Button startMuseumButton;
     public Button startSlumButton;
 
-    public GameObject GetLevel(LevelIndex levelIndex)
+    public Level GetLevel(LevelIndex levelIndex)
     {
         switch (levelIndex)
         {
