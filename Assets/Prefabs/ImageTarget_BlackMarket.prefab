@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 2042100709}
   - component: {fileID: 184030946}
   - component: {fileID: 184030945}
+  - component: {fileID: 3179267039400800929}
   m_Layer: 0
   m_Name: BlackMarketGrid
   m_TagString: Ground
@@ -569,6 +570,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3179267039400800929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243753796879214954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9dc209f3bdf3743b67c39f57c72561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LootAmount: 5
 --- !u!1 &3724943259402699533
 GameObject:
   m_ObjectHideFlags: 0

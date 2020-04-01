@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 1984812585}
   - component: {fileID: 2126090370}
   - component: {fileID: 2126090369}
+  - component: {fileID: 8891906167576147280}
   m_Layer: 0
   m_Name: HarbourGrid
   m_TagString: Ground
@@ -222,6 +223,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &8891906167576147280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388397737466665956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9dc209f3bdf3743b67c39f57c72561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LootAmount: 5
 --- !u!1 &388397737557150431
 GameObject:
   m_ObjectHideFlags: 0

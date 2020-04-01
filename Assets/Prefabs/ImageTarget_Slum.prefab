@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 2060435586}
   - component: {fileID: 505209018}
   - component: {fileID: 505209017}
+  - component: {fileID: 6368244048230246420}
   m_Layer: 8
   m_Name: SlumGrid
   m_TagString: Ground
@@ -404,6 +405,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6368244048230246420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717433155035101321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9dc209f3bdf3743b67c39f57c72561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LootAmount: 5
 --- !u!1 &5717433155113098686
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class DebugLogCanvas : MonoBehaviour
     private void DebugCallBack(string condition, string stacktrace, UnityEngine.LogType type)
     {
         GameObject logMessage = Instantiate(debugLogPrefab, contentList);
-        logMessage.GetComponentInChildren<Text>().text = condition;
+        logMessage.GetComponentInChildren<Text>().text = condition + "\n" + stacktrace;
         Color background = (type == LogType.Warning ? Color.yellow : (type == LogType.Error ? Color.red : Color.white));
         background.a = 0.4f;
         logMessage.GetComponent<Image>().color = background;
