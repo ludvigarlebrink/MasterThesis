@@ -6,15 +6,22 @@ using UnityEngine.Events;
 public class GameTimer : MonoBehaviour
 {
     public UnityEvent onTimerFinished = new UnityEvent();
-
     private float m_CurrentTime = 0.0f;
+
+    public float currentTime
+    {
+        get
+        {
+            return m_CurrentTime;
+        }
+    }
 
     public string timeFormated
     {
         get
         {
             int minutes = Mathf.FloorToInt(m_CurrentTime / 60);
-            int seconds = Mathf.FloorToInt(m_CurrentTime / 60);
+            int seconds = Mathf.FloorToInt(m_CurrentTime % 60);
 
             string value = "";
             if (minutes <= 9)
@@ -27,9 +34,10 @@ public class GameTimer : MonoBehaviour
             
             if (seconds <= 9)
             {
-
+                value += "0";
             }
 
+            value += seconds.ToString();
             return value;
         }
     }

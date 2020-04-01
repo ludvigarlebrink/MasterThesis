@@ -115,6 +115,8 @@ GameObject:
   - component: {fileID: 1984812584}
   - component: {fileID: 1984812425}
   - component: {fileID: 1984812585}
+  - component: {fileID: 2126090370}
+  - component: {fileID: 2126090369}
   m_Layer: 0
   m_Name: HarbourGrid
   m_TagString: Ground
@@ -131,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 388397737466665956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2557239045226271387}
   - {fileID: 4587856615006763379}
@@ -185,6 +187,41 @@ MonoBehaviour:
   distanceBetweenNodes: 1
   m_GridSizeX: 20
   m_GridSizeZ: 20
+--- !u!114 &2126090370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388397737466665956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d7bfcd82ea23d4499707e6074a423b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 0}
+--- !u!114 &2126090369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388397737466665956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 2126090370}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &388397737557150431
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +312,7 @@ GameObject:
   - component: {fileID: 388397737934834334}
   m_Layer: 0
   m_Name: ImageTarget_Harbour
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,7 +326,7 @@ Transform:
   m_GameObject: {fileID: 388397737934834333}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 388397737466665957}
   m_Father: {fileID: 0}
@@ -662,7 +699,7 @@ GameObject:
   - component: {fileID: 6716404186558703891}
   - component: {fileID: 6558752862115378735}
   m_Layer: 5
-  m_Name: Button
+  m_Name: HarbourButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

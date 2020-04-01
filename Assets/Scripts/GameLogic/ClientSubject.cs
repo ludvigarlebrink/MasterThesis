@@ -20,11 +20,15 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     public LevelIndex levelIndex = LevelIndex.None;
     public GameObject clickFeedbackPrefab = null;
 
+    private GameUI m_GameUI = null;
+    private GameTimer m_GameTimer = null;
+
     private Thief m_Thief = null;
     private PathfindingAgent m_ThiefPathfindingAgent = null;
     private WorldManager m_WorldManager = null;
     private PhotonView m_PhotonView = null;
     private ParticleSystem m_ClickFeedback = null;
+
     // Added by Chris to deactivate loot after collection
     private Loot m_currentLootTarget = null;
 
@@ -69,6 +73,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Bank;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartBlackMarketButton()
@@ -79,6 +84,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.BlackMarket;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartHarbourButton()
@@ -89,6 +95,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Harbour;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartJewleryButton()
@@ -99,6 +106,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Jewlery;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartMarketButton()
@@ -109,6 +117,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Market;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartMuseumButton()
@@ -119,6 +128,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Museum;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
     }
 
     private void OnStartSlumButton()
@@ -129,6 +139,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_ThiefPathfindingAgent.pathfindingManager = m_ThiefPathfindingAgent.GetComponentInParent<PathfindingManager>();
         levelIndex = LevelIndex.Slum;
         m_Thief.ResetThief();
+        m_GameTimer.StartTimer(45.0f);
+    }
+
+    private void OnTimerFinished()
+    {
+
     }
 
     private void ReadStream(PhotonStream stream)
@@ -230,10 +246,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                             m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
                         }
                     }
+                    
                     if (m_ClickFeedback.isPlaying)
                     {
                         m_ClickFeedback.Clear();
                     }
+
                     m_ClickFeedback.transform.position = hit.point;
                     m_ClickFeedback.Play();
                 }
@@ -277,6 +295,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         {
             m_WorldManager.startSlumButton.onClick.AddListener(OnStartSlumButton);
         }
+
+        m_GameTimer = GetComponent<GameTimer>();
+        m_GameUI = FindObjectOfType<GameUI>();
+        m_GameUI.gameTimer = m_GameTimer;
+
+        
 
         m_IsSetup = true;
     }
