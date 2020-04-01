@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class WorldManager : MonoBehaviourPunCallbacks
 {
+    public Level bank;
+    public Level blackMarket;
+    public Level harbour;
+    public Level jewlery;
+    public Level market;
+    public Level museum;
+    public Level slum;
+
     public GameObject levelBank;
     public GameObject levelBlackMarket;
     public GameObject levelHarbour;

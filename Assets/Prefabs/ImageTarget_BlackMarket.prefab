@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8139164809265721554}
   - component: {fileID: 3200949897585854841}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BlackMarketButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,6 +462,8 @@ GameObject:
   - component: {fileID: 2042100708}
   - component: {fileID: 2042100544}
   - component: {fileID: 2042100709}
+  - component: {fileID: 184030946}
+  - component: {fileID: 184030945}
   m_Layer: 0
   m_Name: BlackMarketGrid
   m_TagString: Ground
@@ -478,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 3243753796879214954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5541023077092275236}
   - {fileID: 5162175608848566027}
@@ -532,6 +534,41 @@ MonoBehaviour:
   distanceBetweenNodes: 1
   m_GridSizeX: 20
   m_GridSizeZ: 20
+--- !u!114 &184030946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243753796879214954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d7bfcd82ea23d4499707e6074a423b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 0}
+--- !u!114 &184030945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3243753796879214954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 184030946}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3724943259402699533
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +824,7 @@ Transform:
   m_GameObject: {fileID: 4692486005770120828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3011308733876583483}
   m_Father: {fileID: 0}
@@ -806,9 +843,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTrackableName: Grid_BlackMarket_Noise
-  mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/MasterThesis_GridBased.xml
+  mPreserveChildSize: 0
   mAspectRatio: 1
   mImageTargetType: 0
   mWidth: 20
