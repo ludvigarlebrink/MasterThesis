@@ -78,6 +78,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Bank;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartBlackMarketButton()
@@ -89,6 +90,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.BlackMarket;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartHarbourButton()
@@ -100,6 +102,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Harbour;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartJewleryButton()
@@ -111,6 +114,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Jewlery;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartMarketButton()
@@ -122,6 +126,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Market;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartMuseumButton()
@@ -133,6 +138,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Museum;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnStartSlumButton()
@@ -144,6 +150,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         levelIndex = LevelIndex.Slum;
         m_Thief.ResetThief();
         m_GameTimer.StartTimer(45.0f);
+        m_Thief.gameObject.SetActive(true);
     }
 
     private void OnTimerFinished()
@@ -375,6 +382,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                 thiefObject = t.gameObject;
                 m_ThiefPathfindingAgent = thiefObject.GetComponent<PathfindingAgent>();
                 m_ThiefPathfindingAgent.onReachedDestination.AddListener(OnReachedDestination);
+                m_Thief.gameObject.SetActive(false);
 
                 if (!m_ThiefPathfindingAgent)
                 {
