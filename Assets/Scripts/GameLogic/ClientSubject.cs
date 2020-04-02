@@ -148,7 +148,10 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void OnTimerFinished()
     {
-
+        levelIndex = LevelIndex.None;
+        m_Thief.ResetThief();
+        m_Thief.gameObject.SetActive(false);
+        m_Thief.transform.parent = null;
     }
 
     private void ReadStream(PhotonStream stream)
@@ -327,7 +330,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         m_GameUI = FindObjectOfType<GameUI>();
         m_GameUI.gameTimer = m_GameTimer;
 
-        
+        m_GameTimer.onTimerFinished.AddListener(OnTimerFinished);
 
         m_IsSetup = true;
     }
