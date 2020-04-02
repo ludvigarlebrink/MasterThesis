@@ -36,6 +36,10 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
 
+    private bool m_IsBlocked = false;
+    private float m_BlockedTimeCounter = 0.0f;
+    private float m_BlockedTime = 4.0f;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -192,6 +196,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void Update()
     {
+        if (m_IsBlocked && m_BlockedTimeCounter <= 0)
+        {
+            m_IsBlocked = false;
+            m_Thief.Stun(false);
+        }
+
         if (!thiefObject)
         {
             SetupThief();
@@ -214,12 +224,29 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             m_Thief.currentNoise -= 0.05f * Time.deltaTime;
         }
 
-        if (m_Thief.currentNoise < 1 && m_IsMoving)
+        if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
         {
             m_Thief.currentNoise += 0.1f * Time.deltaTime;
         }
 
         m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
+
+        if (m_IsBlocked)
+        {
+            m_BlockedTimeCounter -= Time.deltaTime;
+            return;
+        }
+
+        if (m_Thief.currentNoise == 1)
+        {
+            m_ThiefPathfindingAgent.SetDestination(thiefObject.transform.position);
+            m_IsMoving = false;
+            m_IsMovingTowardsLootObject = false;
+            m_IsBlocked = true;
+            m_Thief.Stun(true);
+            m_BlockedTimeCounter = m_BlockedTime;
+            return;
+        }
 
         if (levelIndex != LevelIndex.None)
         {
@@ -232,7 +259,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     {
                         m_IsMovingTowardsLootObject = false;
                         m_IsMoving = true;
-                        m_ThiefPathfindingAgent.SetDestination(hit.point, true);
+                        m_IsMoving = m_ThiefPathfindingAgent.SetDestination(hit.point, true);
                     }
                     else if (hit.collider.GetComponent<Loot>())
                     {
