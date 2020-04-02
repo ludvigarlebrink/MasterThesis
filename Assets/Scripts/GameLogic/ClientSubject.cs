@@ -148,6 +148,35 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private void OnTimerFinished()
     {
+        switch (levelIndex)
+        {
+            case LevelIndex.None:
+                break;
+            case LevelIndex.Bank:
+                m_WorldManager.startBankButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.BlackMarket:
+                m_WorldManager.startBlackMarketButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.Harbour:
+                m_WorldManager.startHarbourButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.Jewlery:
+                m_WorldManager.startJewleryButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.Market:
+                m_WorldManager.startMarketButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.Museum:
+                m_WorldManager.startMuseumButton.gameObject.SetActive(true);
+                break;
+            case LevelIndex.Slum:
+                m_WorldManager.startSlumButton.gameObject.SetActive(true);
+                break;
+            default:
+                break;
+        }
+
         levelIndex = LevelIndex.None;
         m_Thief.ResetThief();
         m_Thief.gameObject.SetActive(false);
