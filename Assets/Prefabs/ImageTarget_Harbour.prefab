@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d7bfcd82ea23d4499707e6074a423b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 0}
+  startButton: {fileID: 6558752862115378735}
 --- !u!114 &2126090369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9dc209f3bdf3743b67c39f57c72561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LootAmount: 5
+  m_LootAmount: 10
 --- !u!1 &388397737557150431
 GameObject:
   m_ObjectHideFlags: 0
