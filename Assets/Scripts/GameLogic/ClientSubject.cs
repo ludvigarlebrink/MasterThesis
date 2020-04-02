@@ -229,7 +229,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
         {
-            m_Thief.currentNoise += 0.1f * Time.deltaTime;
+            m_Thief.currentNoise += 0.2f * Time.deltaTime;
         }
 
         m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
