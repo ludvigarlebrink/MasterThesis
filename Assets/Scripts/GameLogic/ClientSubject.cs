@@ -265,7 +265,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
         {
-            m_Thief.currentNoise += 0.2f * Time.deltaTime;
+            m_Thief.currentNoise += 0.15f * Time.deltaTime;
         }
 
         m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
@@ -278,9 +278,9 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         if (m_Thief.currentNoise == 1)
         {
-            m_ThiefPathfindingAgent.SetDestination(thiefObject.transform.position);
             m_IsMoving = false;
             m_IsMovingTowardsLootObject = false;
+            m_ThiefPathfindingAgent.SetDestination(thiefObject.transform.position);
             m_IsBlocked = true;
             m_Thief.Stun(true);
             m_BlockedTimeCounter = m_BlockedTime;
