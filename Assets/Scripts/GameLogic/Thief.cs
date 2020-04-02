@@ -9,21 +9,21 @@ public class Thief : MonoBehaviour, IPunObservable
     public int currentLoot = 0;
     public float currentNoise = 0;
 
-    private PlayerHUD m_interface;
+    private PlayerHUD m_Interface;
 
     private void Start()
     {
-        m_interface = GetComponentInChildren<PlayerHUD>();
-        if (m_interface)
+        m_Interface = GetComponentInChildren<PlayerHUD>();
+        if (m_Interface)
         {
             PhotonView view = GetComponent<PhotonView>();
             if (view && view.Owner != null)
             {
-                m_interface.SetName(view.Owner.NickName);
+                m_Interface.SetName(view.Owner.NickName);
             }
             else
             {
-                m_interface.SetName("Nobody");
+                m_Interface.SetName("Nobody");
             }
         }
     }
@@ -69,10 +69,10 @@ public class Thief : MonoBehaviour, IPunObservable
 
     private void UpdateInterface()
     {
-        if (m_interface)
+        if (m_Interface)
         {
-            m_interface.SetNoise(currentNoise);
-            m_interface.SetLoot(currentLoot);
+            m_Interface.SetNoise(currentNoise);
+            m_Interface.SetLoot(currentLoot);
         }
     }
 }
