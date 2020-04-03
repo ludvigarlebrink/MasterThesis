@@ -7,21 +7,18 @@ public class ScoreUI : MonoBehaviour
 {
     public List<GameObject> collectLoot;
     public Button button;
-    public GameObject madeItToExitObject;
-    public GameObject didNotMakeItToExitObject;
+    public Text madeItToExitObject;
 
     public void Show(int collectedLoot, bool madeItToExit)
     {
         gameObject.SetActive(true);
         if (madeItToExit)
         {
-            madeItToExitObject.SetActive(true);
-            didNotMakeItToExitObject.SetActive(false);
+            madeItToExitObject.text = "Successful Escaped";
         }
         else
         {
-            madeItToExitObject.SetActive(false);
-            didNotMakeItToExitObject.SetActive(true);
+            madeItToExitObject.text = "Failed Escaped";
         }
 
         for (int i = 0; i < collectedLoot; ++i)
@@ -43,8 +40,6 @@ public class ScoreUI : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnClick);
-        madeItToExitObject.SetActive(false);
-        didNotMakeItToExitObject.SetActive(false);
         gameObject.SetActive(false);
 
         foreach (GameObject item in collectLoot)
