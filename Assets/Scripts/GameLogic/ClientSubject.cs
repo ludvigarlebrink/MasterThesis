@@ -385,7 +385,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         m_GameTimer = GetComponent<GameTimer>();
         m_GameUI = FindObjectOfType<GameUI>();
-        m_ScoreUI = FindObjectOfType<ScoreUI>();
+        m_ScoreUI = Resources.FindObjectsOfTypeAll<ScoreUI>()[0];
 
         m_GameUI.gameTimer = m_GameTimer;
 
