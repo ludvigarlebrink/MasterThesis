@@ -22,6 +22,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
     private GameUI m_GameUI = null;
     private GameTimer m_GameTimer = null;
+    private ScoreUI m_ScoreUI = null;
 
     private Thief m_Thief = null;
     private PathfindingAgent m_ThiefPathfindingAgent = null;
@@ -185,6 +186,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
 
         levelIndex = LevelIndex.None;
+        m_ScoreUI.Show(m_Thief.currentLoot);
         m_Thief.ResetThief();
         m_Thief.gameObject.SetActive(false);
         m_Thief.transform.parent = null;
@@ -364,6 +366,8 @@ public class ClientSubject : MonoBehaviour, IPunObservable
 
         m_GameTimer = GetComponent<GameTimer>();
         m_GameUI = FindObjectOfType<GameUI>();
+        m_ScoreUI = FindObjectOfType<ScoreUI>();
+
         m_GameUI.gameTimer = m_GameTimer;
 
         m_GameTimer.onTimerFinished.AddListener(OnTimerFinished);
