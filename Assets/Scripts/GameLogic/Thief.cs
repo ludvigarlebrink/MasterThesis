@@ -8,6 +8,7 @@ public class Thief : MonoBehaviour, IPunObservable
 {
     public int currentLoot = 0;
     public float currentNoise = 0;
+    public bool atExit = false;
 
     private PlayerHUD m_Interface;
     private ParticleSystem m_StunParticles;
@@ -47,6 +48,7 @@ public class Thief : MonoBehaviour, IPunObservable
     {
         currentLoot = 0;
         currentNoise = 0;
+        atExit = false;
 
         UpdateInterface();
     }

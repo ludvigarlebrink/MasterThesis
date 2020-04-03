@@ -42,6 +42,11 @@ public class GameTimer : MonoBehaviour
         }
     }
 
+    public void EndPrematurely()
+    {
+        m_CurrentTime = float.Epsilon;
+    }
+
     public void StartTimer(float startTime)
     {
         m_CurrentTime = startTime;
