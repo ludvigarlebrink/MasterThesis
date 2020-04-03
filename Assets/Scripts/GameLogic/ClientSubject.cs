@@ -34,6 +34,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
     private Loot m_currentLootTarget = null;
 
     private bool m_IsMoving = false;
+    private bool m_IsMovingTowardsExit = false;
     private bool m_IsMovingTowardsLootObject = false;
     private bool m_IsSetup = false;
 
@@ -64,6 +65,13 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             m_currentLootTarget.Collect();
             m_currentLootTarget = null;
         }
+        else if (m_IsMovingTowardsExit)
+        {
+            m_Thief.atExit = true;
+            m_IsMovingTowardsExit = false;
+            m_GameTimer.EndPrematurely();
+        }
+
         if (m_IsMoving)
         {
             m_IsMoving = false;
@@ -262,12 +270,12 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         // Continuous noise change
         if (m_Thief.currentNoise > 0)
         {
-            m_Thief.currentNoise -= 0.05f * Time.deltaTime;
+            m_Thief.currentNoise -= 0.1f * Time.deltaTime;
         }
 
         if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
         {
-            m_Thief.currentNoise += 0.15f * Time.deltaTime;
+            m_Thief.currentNoise += 0.18f * Time.deltaTime;
         }
 
         m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
@@ -299,6 +307,15 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                     if (hit.collider.tag == "Ground")
                     {
                         m_IsMovingTowardsLootObject = false;
+                        m_IsMovingTowardsExit = false;
+                        m_IsMoving = true;
+                        m_Thief.atExit = false;
+                        m_IsMoving = m_ThiefPathfindingAgent.SetDestination(hit.point, true);
+                    }
+                    else if (hit.collider.tag == "Exit")
+                    {
+                        m_IsMovingTowardsLootObject = false;
+                        m_IsMovingTowardsExit = true;
                         m_IsMoving = true;
                         m_IsMoving = m_ThiefPathfindingAgent.SetDestination(hit.point, true);
                     }
@@ -309,7 +326,9 @@ public class ClientSubject : MonoBehaviour, IPunObservable
                         {
                             Debug.Log("Object : " + loot.GetPosition().ToString());
                             m_IsMoving = true;
+                            m_IsMovingTowardsExit = true;
                             m_IsMovingTowardsLootObject = true;
+                            m_Thief.atExit = false;
                             m_currentLootTarget = loot;
                             m_ThiefPathfindingAgent.SetDestination(loot.GetPosition());
                         }
