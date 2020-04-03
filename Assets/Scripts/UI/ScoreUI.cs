@@ -13,8 +13,16 @@ public class ScoreUI : MonoBehaviour
     public void Show(int collectedLoot, bool madeItToExit)
     {
         gameObject.SetActive(true);
-        madeItToExitObject.SetActive(madeItToExit);
-        didNotMakeItToExitObject.SetActive(!madeItToExit);
+        if (madeItToExit)
+        {
+            madeItToExitObject.SetActive(true);
+            didNotMakeItToExitObject.SetActive(false);
+        }
+        else
+        {
+            madeItToExitObject.SetActive(false);
+            didNotMakeItToExitObject.SetActive(true);
+        }
 
         for (int i = 0; i < collectedLoot; ++i)
         {
@@ -35,9 +43,9 @@ public class ScoreUI : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnClick);
-        gameObject.SetActive(false);
         madeItToExitObject.SetActive(false);
         didNotMakeItToExitObject.SetActive(false);
+        gameObject.SetActive(false);
 
         foreach (GameObject item in collectLoot)
         {
