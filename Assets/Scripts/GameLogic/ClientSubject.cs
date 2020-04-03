@@ -194,7 +194,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
 
         levelIndex = LevelIndex.None;
-        m_ScoreUI.Show(m_Thief.currentLoot);
+        m_ScoreUI.Show(m_Thief.currentLoot, m_Thief.atExit);
         m_Thief.ResetThief();
         m_Thief.gameObject.SetActive(false);
         m_Thief.transform.parent = null;
