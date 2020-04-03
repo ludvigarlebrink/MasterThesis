@@ -31,6 +31,7 @@ public class ScoreUI : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(OnClick);
+        gameObject.SetActive(false);
 
         foreach (GameObject item in collectLoot)
         {
