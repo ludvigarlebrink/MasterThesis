@@ -64,6 +64,7 @@ public class CreateRoomState : MonoBehaviourPunCallbacks
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
+        roomOptions.PlayerTtl = 1800000;
         PhotonNetwork.CreateRoom(m_InputField.text, roomOptions);
     }
 

@@ -59,7 +59,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         if (m_IsMovingTowardsLootObject && m_currentLootTarget != null)
         {
             m_Thief.currentLoot += 1;
-            m_Thief.currentNoise += 0.1f;
+            m_Thief.currentNoise += 0.12f;
             m_IsMovingTowardsLootObject = false;
             // Collect loot
             m_currentLootTarget.Collect();
@@ -268,10 +268,10 @@ public class ClientSubject : MonoBehaviour, IPunObservable
         }
 
         // Continuous noise change
-        if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
-        {
-            m_Thief.currentNoise += 0.1f * Time.deltaTime;
-        }
+        // if (m_Thief.currentNoise < 1 && m_IsMoving && !m_IsBlocked)
+        // {
+        //     m_Thief.currentNoise += 0.1f * Time.deltaTime;
+        // }
 
         m_Thief.currentNoise = Mathf.Clamp01(m_Thief.currentNoise);
 
@@ -281,7 +281,7 @@ public class ClientSubject : MonoBehaviour, IPunObservable
             return;
         }
 
-        if (m_Thief.currentNoise == 1)
+        if (m_Thief.currentNoise >= 1.0f)
         {
             m_IsMoving = false;
             m_IsMovingTowardsExit = false;
